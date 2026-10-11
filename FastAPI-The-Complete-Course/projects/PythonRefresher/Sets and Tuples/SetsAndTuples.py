@@ -45,12 +45,14 @@ Tuples are similar to list but are immutable meaning cannot be changed/modified 
 my_tuple = (1, 2, 3, 4, 5, 1, 2)
 print(my_tuple)
 print(my_tuple[1])
+print(len(my_tuple))
 # my_tuple[1] = 100   # item assignment not supported
 
 
 
 tuple2 = (1, [1,2], 3, 4)
 print(tuple2)
+print(len(tuple2))
 
 # since the 2nd element is a list within tuple can be modified as this do not change the tuple elements
 tuple2[1].append(5)

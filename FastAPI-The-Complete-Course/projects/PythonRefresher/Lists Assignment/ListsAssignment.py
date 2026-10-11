@@ -20,5 +20,7 @@ i = 0
 while i < 3:
     print(zoo[i])
     i += 1
-
+for x in range(3):
+    print(zoo[x])
+    x += 1
 
