@@ -13,3 +13,7 @@ decimals within the return is allowed..
 days = int(input("How many days until your birthday? "))
 
 print(round(days/7, 2))
+
+weeks = int(input("How many days until your birthday? "))
+
+print(F"Number of weeks left for your birthday: {round(weeks/7, 2)}")
