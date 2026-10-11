@@ -8,3 +8,33 @@
 # __pycache__/
 # .idea
 # env
+
+# === Python Virtual Environments ===
+# Blocks the heavy virtual environment folder where your libraries are installed
+.venv/
+venv/
+ENV/
+env/
+
+# === Python Cache & Compiled Files ===
+# Blocks local Python performance cache files
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# === Environment Variables & Secrets ===
+# Blocks files containing secret database credentials or API keys
+.env
+.env.*
+!.env.example
+
+# === IDEs and Editors ===
+# Blocks workspace configurations specific to your computer
+.vscode/
+.idea/
+
+# === OS Generated Files ===
+# Blocks system junk files
+Thumbs.db
+Desktop.ini
+.DS_Store
