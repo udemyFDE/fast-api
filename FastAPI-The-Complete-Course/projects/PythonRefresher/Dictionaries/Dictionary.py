@@ -35,6 +35,18 @@ user_dictionary2 = user_dictionary.copy()
 # remove the element using the key (not index)
 user_dictionary2.pop("age")
 print(user_dictionary2)
+print(user_dictionary)
+#  output -- user_dictionary will have the age but not in user_dictionary2
+
+# another example of variable assignment
+# user_dictionary2 = user_dictionary
+# remove the element using the key (not index)
+# user_dictionary2.pop("age")
+# print(user_dictionary2)
+#  here we assigned the dictionary-1 to dictionary-2
+#  even though the pop is performed on dictionary-2 also the dictionary-1 loose it
+# print(user_dictionary)
+#  output -- user_dictionary and user_dictionary2 will not have the age
 
 
 #  loop though the dictionary

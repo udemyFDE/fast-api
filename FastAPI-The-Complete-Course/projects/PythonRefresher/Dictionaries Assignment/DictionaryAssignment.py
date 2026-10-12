@@ -23,7 +23,8 @@ my_vehicle = {
 
 
 for x, y in my_vehicle.items():
-    print(x, y)
+    # print(x, y)
+    print(F"{x}: {y}")
 
 
 vehicle2 = my_vehicle.copy()
@@ -36,6 +37,11 @@ vehicle2.pop("mileage")
 
 
 for i in vehicle2:
+    print(i)
+
+# OR
+
+for i in vehicle2.keys():
     print(i)
 
 
