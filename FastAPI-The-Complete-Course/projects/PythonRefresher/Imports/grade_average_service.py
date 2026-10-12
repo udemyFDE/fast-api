@@ -1,3 +1,8 @@
+'''
+Module -- has the custom function defined
+- can be called from any file using import
+'''
+
 def calculate_homework(homework_assignments_arg):
     sum_of_grades = 0
     for homework in homework_assignments_arg.values():
