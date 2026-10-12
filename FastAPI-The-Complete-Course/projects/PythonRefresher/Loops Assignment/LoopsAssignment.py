@@ -17,6 +17,16 @@ while x < 3:
             continue
         print(i)
 
+#  OR
+
+# while x < 3:
+#     for i in my_list:
+#         if i == "Monday":
+#             print("------")
+#             continue
+#         print(i)
+#     x += 1
+
 
 
 
