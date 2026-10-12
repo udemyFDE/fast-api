@@ -67,6 +67,12 @@
 
 * `definition of abstraction` -- This means to hide the implementation and only show necessary details to the user.
 
+* `why do we want to use abstraction?`
+    - This allows users to not have to understand what the functionality is behind the scenes.
+    - We can create simple and reusable code.
+    - Allows us for a better use Case of the DRY principle (don't repeat yourself).
+    - And lastly, it enables Python objects to become more scalable in the long term.
+
 #### Encapsulation
 
 

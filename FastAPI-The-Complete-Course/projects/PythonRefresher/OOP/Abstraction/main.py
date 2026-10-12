@@ -24,6 +24,8 @@ zombie = Enemy()
 
 # define typ_of_enemy
 zombie.type_of_enemy = 'Zombie'
+
+# print(zombie.talk())  # will print the output of function and also a None
 # type_of_enemy has no value in the class, so the below print statement gives error
 print(f'{zombie.type_of_enemy} has {zombie.health_points} health points and can do attack of {zombie.attack_damage}')
 

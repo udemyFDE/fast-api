@@ -4,6 +4,7 @@ class Enemy:
     health_points: int = 10
     attack_damage: int = 1
 
+    # self here points to the class Enemy
     def talk(self):
         print(f"I am a {self.type_of_enemy}. Be prepared to fight!")
 
