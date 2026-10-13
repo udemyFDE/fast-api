@@ -99,7 +99,9 @@ class Enemy:
     - _parameter constructors_
         - You define __init__() with extra parameters to initialize an object. passing stuff into that object when it gets instantiated.
 
+- Using constructors can help to have less code and create/instantiate multiple objects using the same Class object
 
+- The constructor (especially the parameter constructor) allows to pass the values but also to overwrite the values. If do not want to allow the overwrite, can be fixed using [_encapsulation_](#encapsulation)
 
 ### Four Pillars of OOP(s)
 1. [_Encapsulation_](#encapsulation)
@@ -109,6 +111,12 @@ class Enemy:
 
 
 #### Abstraction
+* Abstraction is the process of hiding implementation details and showing only the essential features to the user. In simple words, you know what something does, without needing to know how it works internally.
+* Think about an ATM machine:
+    - You enter your PIN and the amount.
+    - The ATM gives you cash.
+    - You don't need to know how the ATM verifies your PIN or communicates with the bank internally.
+>This is abstraction: you use the necessary features without dealing with the internal complexity.
 * It's an interface that allows a user to turn on and off things, or do different types of functionality without understanding or needing to understand the actual functionality of what happens inside.
 
 > eg: we can kind of think of abstraction like a flashlight. A flashlight has an on and off switch. When you turn the switch on, you expect a beam of light to shoot out of the flashlight. When the switch is off, you expect no light. Now, what's tricky about that is we don't know how the light inside the flashlight turns on and off. We just know that when the flashlight is on, we expect a beam of light.
@@ -122,7 +130,55 @@ class Enemy:
     - And lastly, it enables Python objects to become more scalable in the long term.
 
 #### Encapsulation
+* Encapsulation is the process of bundling data (variables) and methods (functions) into a single class and controlling access to that data.
+* In simple words, encapsulation protects an object's data from being changed directly in unintended ways.
+* Think of a bank account:
+    - You have a bank balance.
+    - You can deposit or withdraw money through authorized operations.
+    - You shouldn't be able to change the balance arbitrarily without following the rules.
 
+* Let's see through the below example
+    Enemy.py
+    ```
+    class Enemy:
+
+        def __init__(self, type_of_enemy, health_points=10, attack_damage=1):
+            self.type_of_enemy = type_of_enemy
+            self.health_points = health_points
+            self.attack_damage = attack_damage
+
+        def talk(self):
+            print(f"I am an enemy!")
+    ```
+    main.py
+    ```
+    # using the class object
+    from Enemy import *
+
+    zombie = Enemy('zombie')
+
+    zombie.type_of_enemy = 'vampire'
+    zombie.health_points = 100
+    ```
+    - Here, the values are initialized when an object is instantiated using the Enemy() Class object. But we can overwrite these values by simply declaring in main.py. So the attributes under the constructor in Enemy() are kind of public meaning they can be changed.
+    - Enemy() is paased with 'zombie' but in the next line it is being chnaged to 'vampire'. And we know the vampire is not the kind of enemy object that we want to create. So, to prevent the type_of_enemy to be changed after the object is instantiated these public attributes should be made private. This can be done using `Encapsulation`.
+
+* Let's see the encapsulation in the below example
+    Enemy.py
+    ```
+    class Enemy:
+
+        def __init__(self, type_of_enemy, health_points=10, attack_damage=1):
+            self.__type_of_enemy = type_of_enemy
+            self.health_points = health_points
+            self.attack_damage = attack_damage
+
+        def talk(self):
+            print(f"I am an enemy!")
+    ```
+    - Here, we can see `double underscore (__)` before the `type_of_enemy`.
+
+* Now, after using the `double underscore (__)` and still we need to change something or to get the value, that's where the `encapsulation` comes into play.
 
 #### Inheritance
 
