@@ -53,6 +53,55 @@
     ```
     - the dog.py has static info which cannot be changed... futher in the course we deal with creating multiple opbects
 
+
+### Constructors
+- A special method that runs automatically when you create an object from a class. It is used to initialize the object's data.
+- Used to create and initialize an object of a class with or without starting values
+
+- In the below example-files, Enemy() is a class that has some variables with values but type_of_enemy has no value and has to be passed from main.py
+- Enemy() is an example of calling a `Constructor`. We are not passing anything into the parameters in this example
+
+Main.py
+```
+from Enemy import *
+
+zombie = Enemy()
+
+zombie.type_of_enemy = 'Zombie'
+
+zombie.talk()
+zombie.walk_forward()
+zombie.attack()
+```
+
+Enemy.py
+```
+class Enemy:
+
+    type_of_enemy: str
+    health_points: int = 10
+    attack_damage: int = 1
+
+    def talk(self):
+        print(f"I am a {self.type_of_enemy}. Be prepared to fight!")
+
+    def walk_forward(self):
+        print(f"{self.type_of_enemy} moves closer to you")
+
+    def attack(self):
+        print(f"{self.type_of_enemy} attacks for {self.attack_damage} damage")
+```
+- 3 different type of Constructors that we can use in python
+
+    - _default / empty constructors_
+        - Python provides an initializer if you don't define __init__() yourself.
+    - _no argument constructors_
+        - You define __init__() without extra parameters. We don't pass anything into the constructors, but when the object is instantiated, we want some kind of functionality to happen.
+    - _parameter constructors_
+        - You define __init__() with extra parameters to initialize an object. passing stuff into that object when it gets instantiated.
+
+
+
 ### Four Pillars of OOP(s)
 1. [_Encapsulation_](#encapsulation)
 2. [_Abstraction_](#abstraction)
