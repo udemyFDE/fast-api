@@ -109,6 +109,8 @@ class Enemy:
 3. [_Inheritance_](#inheritance)
 4. [_Polymorphism_](#polymorphism)
 
+-  [_quick way to remeber_](#quick-way-to-remember) and [_table comparison_](#comparison)
+
 
 #### Abstraction
 * Abstraction is the process of hiding implementation details and showing only the essential features to the user. In simple words, you know what something does, without needing to know how it works internally.
@@ -234,6 +236,12 @@ class Enemy:
 
 #### Polymorphism
 
+#### Quick way to remember:
+
+* Abstraction: Hides complexity.
+* Encapsulation: Protects data.
+* Inheritance: Reuses code.
+* Polymorphism: One interface, many forms.
 
 #### Comparison
 
