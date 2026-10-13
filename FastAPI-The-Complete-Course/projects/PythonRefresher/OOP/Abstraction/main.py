@@ -1,5 +1,5 @@
 
-# these ar just normal variables
+# these are just normal variables
 # type_of_enemy: str
 # health_points: int = 10
 # attack_damage: int = 1
@@ -31,7 +31,12 @@ print(f'{zombie.type_of_enemy} has {zombie.health_points} health points and can 
 
 
 # example of abstraction, only know/call the functions/methods
-# don't know how it is done/what's inside the code
+# don't know how they work internally/what's inside the code
 zombie.talk()
 zombie.walk_forward()
 zombie.attack()
+
+# zombie.attack()
+# You get the output: Zombie attacks for 1 damage
+# You don't need to know how the attack() method constructs and prints the message.
+# You simply call the method and use its functionality.
