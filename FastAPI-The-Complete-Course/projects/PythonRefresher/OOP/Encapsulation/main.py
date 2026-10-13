@@ -3,10 +3,12 @@
 from Enemy import *
 
 zombie = Enemy('zombie')
-zombie.__type_of_enemy = 'vampire'
+zombie.type_of_enemy = 'vampire'
 # even if we try to overwrite the type_of_enemy value to vampire, the output is still zombie
-
-
+# print(zombie.type_of_enemy)
+# this will print vampire as it is taken from this file and not from Class object
+# print(zombie.__type_of_enemy)
+# error -->'Enemy' object has no attribute '__type_of_enemy
 
 # Getters and Setters in Class object
 enemy_type = zombie.get_type_of_enemy()
