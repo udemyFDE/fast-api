@@ -11,8 +11,28 @@ class Enemy:
     def __init__(self):
         print("New enemy created with no starting values")
 
+    # The above is no-argument constructor, can have statements or initialize attributes.
+    # the initializer has a statement to print while initializing the object
+    # we see this statement on the terminal when an object is instantiated using this Class object
+
     def talk(self):
-        print(f"I am an enemy!")
+        print(f"I am an enemy with {self.health_points} health points and can do the damage of {self.attack_damage}!")
+
+    # OR
+
+    # def __init__(self):
+    #     self.type_of_enemy = 'zombie'
+    #     self.health_points = 100
+    #     # this can initialize the value and/or overwrite the value defined above
+    #
+    # # The above is no-argument constructor, can have statements or initialize attributes.
+    # # the initializer has the values to be used while initializing the object
+    # # These values will be used in the below function
+    #
+    # def talk(self):
+    #     print(f"I am {self.type_of_enemy} with {self.health_points} health points and can do the damage of {self.attack_damage}!")
+
+
 
     # self here points to the class Enemy
     # def talk(self):

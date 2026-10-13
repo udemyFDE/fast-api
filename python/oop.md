@@ -57,7 +57,6 @@
 ### Constructors
 - A special method that runs automatically when you create an object from a class. It is used to initialize the object's data.
 - Used to create and initialize an object of a class with or without starting values
-
 - In the below example-files, Enemy() is a class that has some variables with values but type_of_enemy has no value and has to be passed from main.py
 - Enemy() is an example of calling a `Constructor`. We are not passing anything into the parameters in this example
 

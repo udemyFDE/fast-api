@@ -16,6 +16,10 @@ class Enemy:
     def __init__(self):
         pass
 
+    # The above is default/empty constructor
+    # the initializer only has pass which does nothing but initialize the object
+    # we see nothing on the terminal when an object is instantiated using this Class object
+
     def talk(self):
         print(f"I am an enemy!")
 

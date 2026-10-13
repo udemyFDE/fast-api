@@ -7,11 +7,21 @@ from Enemy import *
 # zombie = Enemy()
 # In empty or no-argument constructors we don't know what the class object require as dynamic inputs, if any.
 
-zombie = Enemy(type_of_enemy='zombie')
+# below 2 are accepted as the missing value is only for type_of_enemy
+# so the constructor will take the given value for type_of_enemy
+# zombie = Enemy(type_of_enemy='zombie')
+zombie = Enemy('zombie')
+
+# if more than one parameters do not have values declared in the Class object
+# then need to explicitly pass them the respective values as below
+# the values can also be passed to overwrite the ones defined in Class object
+# zombie = Enemy(type_of_enemy='zombie', health_points=1000)
 
 
-# define typ_of_enemy
-# zombie.type_of_enemy = 'Zombie'
+print(f'{zombie.type_of_enemy} has {zombie.health_points} health points and can do attack of {zombie.attack_damage}')
+# output --
+# zombie has 10 health points and can do attack of 1
+# health points and attack values are taken from Class object if not defined in this file to overwrite
 
 zombie.talk()
 zombie.walk_forward()
