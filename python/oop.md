@@ -224,6 +224,10 @@ class Enemy:
     - It provides more flexibility to our code.
     - It provides more reusability within our code.
     - And it hides values that a coder does not need to be able to either change or be able to see, and we have it completely encapsulated behind scenes.
+    - Protects data from accidental modification.
+    - Allows validation before changing values.
+    - Keeps related data and methods organized.
+    - Makes code easier to maintain.
 
 #### Inheritance
 
