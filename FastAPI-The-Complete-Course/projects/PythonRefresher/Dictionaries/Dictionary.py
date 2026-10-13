@@ -18,7 +18,9 @@ print(user_dictionary)
 print(len(user_dictionary))
 
 # calling an element using the key (not index)
+print(user_dictionary["username"])
 print(user_dictionary.get("username"))
+print(user_dictionary["username"], user_dictionary["name"])
 print(user_dictionary.get("username"), user_dictionary.get("name"))
 
 # if the key doesn't exist then get() will return 'None' if no value is specified
@@ -26,8 +28,8 @@ print(user_dictionary.get("location"))
 # output -- None
 
 # if the key doesn't exist then get() will return the specified value.
-print(user_dictionary.get("location", "hyderabad"))
-# output -- hyderabad
+print(user_dictionary.get("location", "not exist"))
+# output -- not exist
 
 
 # copy the dictionary to another variable

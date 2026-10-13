@@ -11,8 +11,11 @@ first_name = input("Enter your first name: ")
 # print(test // 2)
 # print(int(round(test/2, 0)))
 days = int(input("How many days before your birthday: "))
+
+# print statement in multiple lines
 print(f"Hi {first_name}, only {days} days "
       f"before your birthday!")
 
+# output -- Hi <first_name>, only <days> days before your birthday!
 
 

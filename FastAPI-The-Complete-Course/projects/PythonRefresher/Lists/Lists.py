@@ -46,7 +46,7 @@ print(people_list)
 # slicing -- to print only the specific data of list
 # x:y -->
 # x denotes the starting index
-# y denotes the count from index 'x' or ending index as y-1
+# y denotes the count starting from index 'x' or ending index at y-1
 print(people_list[0:2])
 print(my_list[2:4])
 

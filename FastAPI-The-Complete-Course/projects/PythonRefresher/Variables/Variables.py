@@ -1,7 +1,6 @@
 """
 Variables
 """
-from calendar import prcal
 
 sample_cost = 10
 print(sample_cost + (10 * 0.25))

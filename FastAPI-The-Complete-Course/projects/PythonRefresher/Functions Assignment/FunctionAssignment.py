@@ -4,7 +4,6 @@ Function Assignment
 returns a dictionary based on those values
 """
 
-
 def user_dictionary(firstname, lastname, age):
     created_user_dictionary = {
         "firstname": firstname,
@@ -17,6 +16,7 @@ def user_dictionary(firstname, lastname, age):
 solution_dictionary = user_dictionary(firstname="Eric", lastname="Roby", age=32)
 print(solution_dictionary)
 
+
 # dynamic input
 first_name = input("enter your first name: ")
 last_name = input("enter your last name: ")
@@ -26,8 +26,17 @@ solution_dictionary2 = user_dictionary(firstname=first_name, lastname=last_name,
 print(solution_dictionary2)
 
 
+# OR
 
+def create_dictionary(firstname, lastname, age):
+    created_dictionary = {
+        "firstname": firstname,
+        "lastname": lastname,
+        "age": age
+    }
+    print(created_dictionary)
 
+create_dictionary(firstname="Eric", lastname="Roby", age=32)
 
 
 

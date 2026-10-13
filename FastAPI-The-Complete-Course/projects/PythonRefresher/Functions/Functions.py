@@ -21,14 +21,30 @@ def print_my_name(first_name, last_name):
     print(f"Hello {first_name} {last_name}..!")  # can be f or F.... prefer to use f
 
 print_my_name("Steve", "Jobs")
+print_my_name(first_name="Steve", last_name="Jobs")
 
 
 # example-4
-def print_dynamic_name(dynamic_name):
+def print_dynamic_name():
     dynamic_name = input("Enter your name: ")
     print(f"Hello, the name provided is : {dynamic_name}")
 
-print_dynamic_name("name")
+print_dynamic_name()
+
+# OR
+
+def print_dynamic_name2(dynamic_name2):
+    dynamic_name2 = input("Enter your name: ")
+    print(f"Hello, the name provided is : {dynamic_name2}")
+
+# while calling the function, need to pass the value as the function us defined with one argument
+# value can be anything as the actual value is taken from user input
+print_dynamic_name2("name")
+
+# if we call it as below
+# print_dynamic_name2()
+# get below error
+# TypeError: print_dynamic_name2() missing 1 required positional argument: 'dynamic_name2'
 
 
 
@@ -91,6 +107,20 @@ def add_tax_to_item(cost_of_item):
 
 final_cost = buy_item(50)
 print(final_cost)
+
+
+# example-10
+# function calling another function
+def item_cost(cost_of_item):
+    total_cost = cost_of_item + add_tax_to_item(cost_of_item)
+    print(total_cost)
+
+
+def tax_to_item(cost_of_item):
+    current_tax_rate = .03
+    return cost_of_item * current_tax_rate
+
+item_cost(45)
 
 
 
