@@ -130,6 +130,10 @@ class Enemy:
     - We can create simple and reusable code.
     - Allows us for a better use Case of the DRY principle (don't repeat yourself).
     - And lastly, it enables Python objects to become more scalable in the long term.
+    - Hides implementation details from the user.
+    - Reduces complexity by exposing only essential functionality.
+    - Enforces a common structure for related classes.
+    - Improves maintainability when internal implementations change.
 
 
 #### Encapsulation
