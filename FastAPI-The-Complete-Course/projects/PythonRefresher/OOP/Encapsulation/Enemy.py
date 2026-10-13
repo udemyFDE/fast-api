@@ -6,7 +6,17 @@ class Enemy:
         self.attack_damage = attack_damage
         # double underscore (__) before type_of_enemy -- can't overwrite the value
 
-    # self here points to the class Enemy
+    def get_type_of_enemy(self):
+        return self.__type_of_enemy
+        # print(self.__type_of_enemy)
+
+    def set_type_of_enemy(self, type_of_enemy):
+        self__type_of_enemy = type_of_enemy
+        # self.__type_of_enemy = type_of_enemy
+# self__type_of_enemy -- not allow to change (Static)
+# self.__type_of_enemy -- can be changed
+
+        # self here points to the class Enemy
     def talk(self):
         print(f"I am a {self.__type_of_enemy} having {self.health_points} health points. Be prepared to fight!")
 

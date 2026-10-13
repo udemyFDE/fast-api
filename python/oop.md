@@ -129,6 +129,7 @@ class Enemy:
     - Allows us for a better use Case of the DRY principle (don't repeat yourself).
     - And lastly, it enables Python objects to become more scalable in the long term.
 
+
 #### Encapsulation
 * Encapsulation is the process of bundling data (variables) and methods (functions) into a single class and controlling access to that data.
 * In simple words, encapsulation protects an object's data from being changed directly in unintended ways.
@@ -161,9 +162,9 @@ class Enemy:
     zombie.health_points = 100
     ```
     - Here, the values are initialized when an object is instantiated using the Enemy() Class object. But we can overwrite these values by simply declaring in main.py. So the attributes under the constructor in Enemy() are kind of public meaning they can be changed.
-    - Enemy() is paased with 'zombie' but in the next line it is being chnaged to 'vampire'. And we know the vampire is not the kind of enemy object that we want to create. So, to prevent the type_of_enemy to be changed after the object is instantiated these public attributes should be made private. This can be done using `Encapsulation`.
+    - Enemy() is passed with 'zombie' but in the next line it is being chnaged to 'vampire'. And we know the vampire is not the kind of enemy object that we want to create. So, to prevent the type_of_enemy to be changed after the object is instantiated these public attributes should be made private. This can be done using `double underscore (__)` before the variable.
 
-* Let's see the encapsulation in the below example
+* Let's see the it in the below example
     Enemy.py
     ```
     class Enemy:
@@ -176,9 +177,53 @@ class Enemy:
         def talk(self):
             print(f"I am an enemy!")
     ```
-    - Here, we can see `double underscore (__)` before the `type_of_enemy`.
+    - Here, we can see `double underscore (__)` before the `type_of_enemy` in `self.__type_of_enemy`.
 
 * Now, after using the `double underscore (__)` and still we need to change something or to get the value, that's where the `encapsulation` comes into play.
+
+* Let's see the `encapsulation` in below example
+    Enemy.py
+    ```
+    class Enemy:
+
+        def __init__(self, type_of_enemy, health_points=10, attack_damage=1):
+            self.__type_of_enemy = type_of_enemy
+            self.health_points = health_points
+            self.attack_damage = attack_damage
+
+        def get_type_of_enemy(self):
+            return self.__type_of_enemy
+
+        def set_type_of_enemy(self, type_of_enemy):
+            self__type_of_enemy = type_of_enemy        
+
+        def talk(self):
+            print(f"I am an enemy!")
+    ```
+    - we can see get and set for type_of_enemy which are called `getters` and `setters` in `encapsulation`. function for get is to return the value for type_of_enemy and set is to actually set the value.
+    - We have no issues with get functionality but the set has the same issue of overwriting the value. So, to prohibit from overwriting do not use the `setters`
+
+    main.py
+    ```
+    from Enemy import *
+
+    zombie = Enemy('zombie')
+    zombie.__type_of_enemy = 'vampire'
+
+    zombie.get_type_of_enemy()
+
+    zombie.talk()
+    zombie.walk_forward()
+    zombie.attack()
+    ```
+    - So, now the `zombie.__type_of_enemy = 'vampire'` will not work, instead we use the `getter` function itself. Everything will work inside our application and we're using encapsulation. We bundled the data away from the interface and it's behind scenes in the class, completely private.
+
+* `why do we want to use encapsulation?`
+    - helps keep related fields and methods together.
+    - It makes our code cleaner and easier to read.
+    - It provides more flexibility to our code.
+    - It provides more reusability within our code.
+    - And it hides values that a coder does not need to be able to either change or be able to see, and we have it completely encapsulated behind scenes.
 
 #### Inheritance
 
