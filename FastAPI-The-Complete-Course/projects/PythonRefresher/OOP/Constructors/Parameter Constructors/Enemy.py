@@ -19,7 +19,7 @@ class Enemy:
 
     # self here points to the class Enemy
     def talk(self):
-        print(f"I am a {self.type_of_enemy} having {self.health_points} points. Be prepared to fight!")
+        print(f"I am a {self.type_of_enemy} having {self.health_points} health points. Be prepared to fight!")
 
     def walk_forward(self):
         print(f"{self.type_of_enemy} moves closer to you")
