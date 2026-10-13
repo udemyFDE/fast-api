@@ -233,3 +233,11 @@ class Enemy:
 
 
 #### Polymorphism
+
+
+#### Comparison
+
+| Abstraction | Encapsulation | Inheritance | Polymorphism |
+|---|---|---|---|
+| Hides implementation details. | Bundles data and methods and manages access. | Allows a class to acquire properties and methods from another class. | Allows the same method or interface to behave differently in different situations. |
+| Focuses on what an object does. | Focuses on controlling how internal data is accessed or changed. | Promotes code reusability. | Promotes flexibility and extensibility. |
