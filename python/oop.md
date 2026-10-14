@@ -392,6 +392,112 @@ class Enemy:
 
 
 #### Polymorphism
+* It means to have many forms.
+* In simple terms, different classes can have a method with the same name, but each class can implement that method differently.
+* Changing the object at specific runtime.
+
+* Let's see the example below by taking the Animal() Class example from Inheritance
+
+    - suppose we have a variable zoo which is of type Animal and it is an empty list
+
+    ```
+    zoo: Animal = []
+    ```
+    - Now, we might have different animal types -- Dog(Animal), Bird(Animal), Lion(Animal) - which all takes in Animal
+
+    class.py (dog.py, bird.py, lion.py)
+    ```
+    Class Dog(Animal)
+
+        ** All Dog methods **
+    
+    Class Bird(Animal)
+
+        ** All Bird methods **
+
+    Class Lion(Animal)
+
+        ** All Lion methods **
+    ```
+    - now, if we try to add some values by creating the object to the list
+
+    main.py
+    ```
+    zoo: Animal = []
+
+    dog = Dog()
+    zoo.append(dog)
+    # this will work as Dog() is of type Animal()
+    # at runtime the dog will be transformed to animal to fit in the Animal list of zoo
+    # same for the below
+
+    bird = Bird()
+    lion = Lion()
+    
+    zoo.append(bird)
+    zoo.append(lion)
+
+
+    dog2 = Animal()
+    zoo.append(dog2)
+    # this will also work as Dog() is of type Animal()
+    # at runtime Animal object is created which will also fit into the list
+
+    ```
+
+* **What is Polymorphism?**
+
+    class.py (Animal.py, dog.py, bird.py, lion.py)
+    ```
+    Class Animal()
+
+        def talk(self):
+            print('Does not make a sound') 
+
+    Class Dog(Animal)
+
+        def talk(self):
+            print('Bark') 
+    
+    Class Bird(Animal)
+
+        def talk(self):
+            print('Chirp') 
+
+    Class Lion(Animal)
+
+        def talk(self):
+            print('Roar.!!') 
+    ```
+    - Assuming we have some animals added to the list as per the below file
+    main.py
+    ```
+    zoo: Animal = []
+
+    dog = Dog()
+    dog2 = Animal()
+    bird = Bird()
+    lion = Lion()
+    
+    zoo.append(dog)
+    zoo.append(bird)
+    zoo.append(lion)    
+    zoo.append(dog2)
+
+
+    for animal in zoo:
+        animal.talk()
+
+
+    # output:
+    # Bark
+    # Does not make a sound
+    # Chirp
+    # Roar..!
+    ```
+    - At polymorphism runtime, it'll change these objects into the correct objects. So it's a data type that has many forms, and it allows us to be able to change objects to fit within other things.
+
+
 
 #### Quick way to remember:
 
