@@ -1,4 +1,4 @@
-## OOP(s) -- Object oriented programming (system)
+# OOP(s) -- Object oriented programming (system)
 
 - It is a programming paradigm based on the concepts of objects which can contain the data and code `(or)` is a way of writing code by organizing it around objects that contain data and functions.
 
@@ -37,7 +37,7 @@
     * Reusability
 
 
-### What are objects?
+#### What are objects?
 
 - Objects are all around (eg: trees, houses, dogs etc.)
     - the example objects can be defined in 2 ways
@@ -83,7 +83,7 @@
     - the dog.py has static info which cannot be changed... futher in the course we deal with creating multiple opbects
 
 
-### Constructors
+#### Constructors
 - A special method that runs automatically when you create an object from a class. It is used to initialize the object's data.
 - Used to create and initialize an object of a class with or without starting values
 - In the below example-files, Enemy() is a class that has some variables with values but type_of_enemy has no value and has to be passed from main.py
@@ -132,7 +132,7 @@ class Enemy:
 
 - The constructor (especially the parameter constructor) allows to pass the values but also to overwrite the values. If do not want to allow the overwrite, can be fixed using [_encapsulation_](#encapsulation)
 
-### Four Pillars of OOP(s)
+## Four Pillars of OOP(s)
 1. [_Encapsulation_](#encapsulation)
 2. [_Abstraction_](#abstraction)
 3. [_Inheritance_](#inheritance)
@@ -141,7 +141,7 @@ class Enemy:
 -  [_quick way to remeber_](#quick-way-to-remember) and [_table comparison_](#comparison)
 
 
-#### Abstraction
+### Abstraction
 * Abstraction is the process of hiding implementation details and showing only the essential features to the user. In simple words, you know what something does, without needing to know how it works internally.
 * Think about an ATM machine:
     - You enter your PIN and the amount.
@@ -153,7 +153,7 @@ class Enemy:
 > eg: we can kind of think of abstraction like a flashlight. A flashlight has an on and off switch. When you turn the switch on, you expect a beam of light to shoot out of the flashlight. When the switch is off, you expect no light. Now, what's tricky about that is we don't know how the light inside the flashlight turns on and off. We just know that when the flashlight is on, we expect a beam of light.
 
 
-* `why do we want to use abstraction?`
+* **why do we want to use abstraction?**
     - This allows users to not have to understand what the functionality is behind the scenes.
     - We can create simple and reusable code.
     - Allows us for a better use Case of the DRY principle (don't repeat yourself).
@@ -164,7 +164,7 @@ class Enemy:
     - Improves maintainability when internal implementations change.
 
 
-#### Encapsulation
+### Encapsulation
 * Encapsulation is the process of bundling data (variables) and methods (functions) into a single class and controlling access to that data.
 * In simple words, encapsulation protects an object's data from being changed directly in unintended ways.
 * Think of a bank account:
@@ -252,7 +252,7 @@ class Enemy:
     ```
     - So, now the `zombie.__type_of_enemy = 'vampire'` will not work, instead we use the `getter` function itself. Everything will work inside our application and we're using encapsulation. We bundled the data away from the interface and it's behind scenes in the class, completely private.
 
-* `why do we want to use encapsulation?`
+* **why do we want to use encapsulation?**
     - helps keep related fields and methods together.
     - It makes our code cleaner and easier to read.
     - It provides more flexibility to our code.
@@ -263,7 +263,7 @@ class Enemy:
     - Keeps related data and methods organized.
     - Makes code easier to maintain.
 
-#### Inheritance
+### Inheritance
 * It is the process of acquiring properties and methods from one Class to other Classes.
 * It creates a hierarchy between classes.
 * Let's understand with the below example
@@ -360,7 +360,7 @@ class Enemy:
     - The methods/properties of a parent class can be overridden by defining the same methods/properties for child class and these will work only when the object is instantiated using the child class.
     - From the example, both dog and animal have the eat functionality. Method overriding is when a child class has its own method already present in the parent class. When the child class does not have the same method, it will default to the parent class.
 
-* `Self` vs `Super`
+* **`Self`** vs **`Super`**
 
 
     | self | super |
@@ -391,7 +391,7 @@ class Enemy:
     - `parent class` is also called as `super class` which is why it has the `super()` functionality.
 
 
-#### Polymorphism
+### Polymorphism
 * It means to have many forms.
 * In simple terms, different classes can have a method with the same name, but each class can implement that method differently.
 * Changing the object at specific runtime.
