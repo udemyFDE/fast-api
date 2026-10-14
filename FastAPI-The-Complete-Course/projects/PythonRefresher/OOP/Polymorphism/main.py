@@ -9,12 +9,27 @@ from Enemy import *
 def battle(e: Enemy):
     e.talk()    # from child class
     e.attack()  # from parent class
-    # zombie.spread_disease()   # for both enemy types we get same output as it is from zombie class
+    zombie.spread_disease()   # called for both enemy types we get same output as it is from zombie class
 
 zombie = Zombie(10, 1)
 ogre = Ogre(20, 3)
 
 battle(zombie)
 battle(ogre)
+
+
+# OR
+
+# def battle(e1: Enemy, e2: Enemy):
+#     e1.talk()    # from child class
+#     e1.attack()  # from parent class
+#     e2.talk()    # from child class
+#     e2.attack()  # from parent class
+#     # zombie.spread_disease()   # e1 and e2 are different enemies, called only once
+#
+# zombie = Zombie(10, 1)
+# ogre = Ogre(20, 3)
+#
+# battle(zombie, ogre)
 
 
