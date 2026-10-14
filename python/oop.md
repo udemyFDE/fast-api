@@ -123,7 +123,6 @@ class Enemy:
 
 > eg: we can kind of think of abstraction like a flashlight. A flashlight has an on and off switch. When you turn the switch on, you expect a beam of light to shoot out of the flashlight. When the switch is off, you expect no light. Now, what's tricky about that is we don't know how the light inside the flashlight turns on and off. We just know that when the flashlight is on, we expect a beam of light.
 
-* `definition of abstraction` -- This means to hide the implementation and only show necessary details to the user.
 
 * `why do we want to use abstraction?`
     - This allows users to not have to understand what the functionality is behind the scenes.
@@ -236,7 +235,133 @@ class Enemy:
     - Makes code easier to maintain.
 
 #### Inheritance
+* It is the process of acquiring properties and methods from one Class to other Classes.
+* It creates a hierarchy between classes.
+* Let's understand with the below example
 
+    Animal.py
+    ```
+    Class Animal
+
+           weight: int
+           color: str
+           age: int
+           animal_type: str
+
+           def eat(self):
+               print('Animal eating)
+
+           def sleep(self):
+               print('Animal sleeping)
+    ```
+    Dog.py
+    ```
+    from Animal import *
+
+    Class Dog(Animal)
+
+        # All attributes/properties of Animal
+
+        can_shed: bool
+        domestic_name: str
+
+        def talk(self):
+            print('Bark')
+
+        def eat(self):
+            print('Chews on bone')
+
+         # All methods of Animal
+
+    ```
+    Bird.py
+    ```
+    from Animal import *
+
+    Class Bird(Animal)
+
+        # All attributes/properties of Animal
+
+        bird_type: str
+
+        def talk(self):
+            print('Chirp')
+
+        def fly(self):
+            print('Bird begins to soar!')
+
+         # All methods of Animal
+
+    ```
+
+    main.py
+    ```
+    from Dog import *
+
+    dog = Dog()
+
+    # this is from parent class
+    dog.sleep()
+
+    # this is from child class overriding the parent class
+    dog.eat()
+
+    # this is from child class
+    dog.talk()
+
+    # this will not work
+    # animal = Animal()
+    # animal.talk()
+    # here the object is instantiated using parent class which do not have talk() functionality defined
+
+    bird = Bird()
+
+    # these will be from the methods in child class Bird()
+    bird.talk()
+    bird.fly()
+
+    # this will not work
+    # animal = Animal()
+    # animal.talk()
+    # animal.fly()
+    # here the object is instantiated using parent class which do not have talk() and fly() functionality defined
+
+    ```
+    - Here, the `Animal` is the `Parent Class`; the `Dog` which inherits the properties of parent class is a `child class` and can also have respective attributes/properties and methods which will work only if the objects are instantiatesd using child class. If any object is instantiated using parent Class, the methods and properties of child class will not work for it.
+    - The methods/properties of a parent class can be overridden by defining the same methods/properties for child class and these will work only when the object is instantiated using the child class.
+    - From the example, both dog and animal have the eat functionality. Method overriding is when a child class has its own method already present in the parent class. When the child class does not have the same method, it will default to the parent class.
+
+* `Self` vs `Super`
+
+
+    | self | super |
+    | --- | --- |
+    | used to refer to a current object that is created or being instantiated | refered to the parent class |
+    | used when there is a need to differentiate between the instance variables and parameters with the same name | used to call the parent class methods and/or constructors |
+    
+    - Let's see the example
+
+    ```
+    Class Person
+
+        def __init__(self, name, age):
+            self.name = name
+            self.age = age
+
+    
+    Class Student(Person)
+
+        def __init__(self, name, age, degree):
+            super().__init__(name=name, age=age)
+            self.degree = degree
+    ```
+    - student has an extra property `degree`.
+    - Student uses `super` to call the person constructor which assigns the property `name` and `age`.
+    - student uses `self` to reference the `degree` property, which is different from the degree parameter / argument coming in.
+    - Here, the parent class `Person()` has the `name` and `age`. The child class `Student()` has additional property `degree` using `self` and used `super()` for name and age to ensure they are used from parent class.
+
+    ```
+    ```
 
 #### Polymorphism
 
