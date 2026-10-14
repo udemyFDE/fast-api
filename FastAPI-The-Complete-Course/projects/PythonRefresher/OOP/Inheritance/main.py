@@ -1,6 +1,15 @@
 from Zombie import *
 from Ogre import *
 
+
+# Below is the object instantiated using the parent class
+# test = Enemy('test', 10, 1)
+# test.talk()
+# test.walk_forward()
+# test.attack()
+# print(test.get_type_of_enemy())
+
+
 zombie = Zombie(10, 1)
 
 print(f'{zombie.get_type_of_enemy()} has {zombie.health_points} health points and can do attack of {zombie.attack_damage}')

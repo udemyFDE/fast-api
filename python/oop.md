@@ -1,6 +1,35 @@
 ## OOP(s) -- Object oriented programming (system)
 
-- It is a programming paradigm based on the concepts of objects which can contain the data and code
+- It is a programming paradigm based on the concepts of objects which can contain the data and code `(or)` is a way of writing code by organizing it around objects that contain data and functions.
+
+- In simple terms, OOP lets you represent real-world things, such as a car, a student, or a zombie in a game, in your code.
+
+    - example: Imagine a car.
+        - Data (attributes): Color, brand, speed.
+        - Actions (methods): Start, stop, accelerate.
+
+        ```
+        class Car:
+            def __init__(self, brand, color):
+                self.brand = brand
+                self.color = color
+
+            def start(self):
+                print(f"{self.brand} is starting!")
+
+
+        # Create an object
+        my_car = Car("Toyota", "Red")
+
+        my_car.start()
+        ```
+        - Output: Toyota is starting!
+
+        - Here is what each term means:
+            - Class: A blueprint for creating objects. Example: Car.
+            - Object: An instance created from a class. Example: my_car.
+            - Attributes: Data belonging to an object. Example: brand and color.
+            - Methods: Functions defined inside a class. Example: start().
 
 - Benefits:
     * Scalability
@@ -359,9 +388,8 @@ class Enemy:
     - Student uses `super` to call the person constructor which assigns the property `name` and `age`.
     - student uses `self` to reference the `degree` property, which is different from the degree parameter / argument coming in.
     - Here, the parent class `Person()` has the `name` and `age`. The child class `Student()` has additional property `degree` using `self` and used `super()` for name and age to ensure they are used from parent class.
+    - `parent class` is also called as `super class` which is why it has the `super()` functionality.
 
-    ```
-    ```
 
 #### Polymorphism
 
