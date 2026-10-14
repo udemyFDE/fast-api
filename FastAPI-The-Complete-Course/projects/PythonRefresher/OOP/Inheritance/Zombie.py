@@ -18,6 +18,8 @@ class Zombie(Enemy):
     #     super().__init__(type_of_enemy=type_of_enemy, health_points=health_points, attack_damage=attack_damage)
 
     # Method overriding
+    # Inherit the parent functionality but also has it's own functionality
+    # own functionality takes the precedence
     def talk(self):
         print("Zombie is *Grumbling...*")
 

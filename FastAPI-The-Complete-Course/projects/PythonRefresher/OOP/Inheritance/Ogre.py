@@ -19,6 +19,8 @@ class Ogre(Enemy):
 
 
     # Method overriding
+    # Inherit the parent functionality but also has it's own functionality
+    # own functionality takes the precedence
     def talk(self):
         print("Ogre is slamming hands all around!")
     
