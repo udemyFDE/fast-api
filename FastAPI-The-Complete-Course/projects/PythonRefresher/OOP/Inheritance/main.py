@@ -25,6 +25,8 @@ zombie.talk()
 # this is from child class, not exist in parent class
 zombie.spread_disease()
 
+print("---------------------")
+
 ogre = Ogre(20, 3)
 print(f'{ogre.get_type_of_enemy()} has {ogre.health_points} health points and can do attack of {ogre.attack_damage}')
 
