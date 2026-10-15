@@ -22,6 +22,6 @@ BOOKS = [
 @app.get("/books")
 
 # this is the function
-async def first_api():
+async def read_all_books():
     return BOOKS
 # even if `async' which stands for asynchronous and is optional for FastAPI
