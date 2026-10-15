@@ -12,9 +12,9 @@
 # === Python Virtual Environments ===
 # Blocks the heavy virtual environment folder where your libraries are installed
 .venv/
-# venv/
-# ENV/
-# env/
+venv/
+ENV/
+env/
 
 # === Python Cache & Compiled Files ===
 # Blocks local Python performance cache files
