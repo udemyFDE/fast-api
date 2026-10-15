@@ -1,3 +1,5 @@
+# only importing weapon class for hero to not have the enemy attributes.
+
 from Weapon import *
 
 class Hero:
