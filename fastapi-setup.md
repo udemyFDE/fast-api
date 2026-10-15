@@ -71,3 +71,15 @@ deactivate
 
     eg:
     (fastapivenv) c:\Users\test\fastapi
+
+* To delete the virtual environment, ensure the working directory is pointing to the parent directory (eg: c:\Users\test\fastapi) of virtual environment forder name and run the below command
+
+```
+rmdir /s /q <name>
+```
+- /s — deletes the folder and all its contents.
+
+- /q — deletes without asking for confirmation.
+
+eg:
+> rmdir /s /q fastapivenv
