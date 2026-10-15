@@ -8,7 +8,7 @@ app = FastAPI()
 # How can we now call this using our appropriate API verbs?
 # so we create a decorative
 
-@app.get("/")
+@app.get("/api-endpoint")
 
 # this is the function
 async def first_api():

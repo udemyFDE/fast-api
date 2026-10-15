@@ -11,5 +11,6 @@ app = FastAPI()
 @app.get("/test-books")
 
 # this is the function
-def testbooks_api():
+async def testbooks_api():
     return {"message": "Hello World..!"}
+# even if `async' which stands for asynchronous and is optional for FastAPI
