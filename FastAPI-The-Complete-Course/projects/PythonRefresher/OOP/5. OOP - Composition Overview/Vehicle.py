@@ -4,3 +4,4 @@ class Vehicle:
         self.type = type
         self.forSale = forSale
         self.engine = engine
+        # Vehicle() class has 'HAS-A' (Composition) relationship with Engine() class

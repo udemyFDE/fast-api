@@ -6,6 +6,7 @@ class Hero:
         self.attack_damage = attack_damage
         self.is_weapon_equipped = False
         self.weapon: Weapon = None
+        # Hero() class has 'HAS-A' (Composition) relationship with Weapon() class
 
 
     def equip_weapon(self):

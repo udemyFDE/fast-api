@@ -140,6 +140,8 @@ class Enemy:
 
 -  [_quick way to remeber_](#quick-way-to-remember) and [_table comparison_](#comparison)
 
+- [_Composition_](#composition) - small concept in OOP(s)
+
 
 ### Abstraction
 * Abstraction is the process of hiding implementation details and showing only the essential features to the user. In simple words, you know what something does, without needing to know how it works internally.
@@ -512,3 +514,14 @@ class Enemy:
 |---|---|---|---|
 | Hides implementation details. | Bundles data and methods and manages access. | Allows a class to acquire properties and methods from another class. | Allows the same method or interface to behave differently in different situations. |
 | Focuses on what an object does. | Focuses on controlling how internal data is accessed or changed. | Promotes code reusability. | Promotes flexibility and extensibility. |
+
+#### Composition
+* Composition means creating a class that contains an object of another class. It is way of creating objects made up of other objects.
+* In composition, a class contains one or more objects of another class as instance variables.
+* Composition is a way to provide layered functionality to the object.
+* known as a `HAS-A` relationship.
+    - If we see the a vehicle example, we have a vehicle (parent class), car and truck (child classes).
+    - A vehicle also has an egine() as `has-a` relation. And the engine might have like a engineOn() or an engineOff() functionality.
+    - So, we can say `car.getEngine().engineOn()`
+    - It is different from an Interface `IS-A` relationship.
+    - From the above example, the vehicle must have an but an engine does not need to have a vehicle (`HAS-A` relation).

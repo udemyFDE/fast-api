@@ -25,8 +25,8 @@ def battle(e1: Enemy, e2: Enemy):
         print(f"{e2.get_type_of_enemy()} wins!")
 
 
-zombie = Zombie(1, 1)
-ogre = Ogre(2, 3)
+zombie = Zombie(12, 4)
+ogre = Ogre(20, 3)
 
 battle(zombie, ogre)
 
