@@ -111,7 +111,7 @@ async def update_book(updated_book=Body()):
     )
 
 # DELETE Method
-
+# using path parameter (dynamic)
 @app.delete("/books/delete_book/{book_title}")
 
 # async def delete_book(book_title: str):
