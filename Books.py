@@ -8,6 +8,7 @@ app = FastAPI()
 # How can we now call this using our appropriate API verbs?
 # so we create a decorative
 
+# GET request method
 @app.get("/api-endpoint")
 
 # this is the function

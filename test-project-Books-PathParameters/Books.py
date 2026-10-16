@@ -25,10 +25,11 @@ async def read_book(book_title: str):
         if book.get('title').casefold() == book_title.casefold():
             return book
 
-    raise HTTPException(
-        status_code=404,
-        detail=f"No book found with the title '{book_title}'"
-    )
+    # use this to explicitly return 404 if the parameters are not related to the function
+    # raise HTTPException(
+    #     status_code=404,
+    #     detail=f"No book found with the title '{book_title}'"
+    # )
 
 # # Order of the functions matters
 # @app.get("/books/mybook")
