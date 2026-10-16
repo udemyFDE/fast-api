@@ -1,0 +1,1 @@
+* Initialize object Books using the Class constructor
