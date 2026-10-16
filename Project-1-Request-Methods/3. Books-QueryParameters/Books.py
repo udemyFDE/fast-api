@@ -1,5 +1,4 @@
 from fastapi import FastAPI, HTTPException
-from pygments.lexer import default
 
 app = FastAPI()
 

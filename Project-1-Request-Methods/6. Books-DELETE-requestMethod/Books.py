@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Body
-from pygments.lexer import default
+
 
 app = FastAPI()
 
