@@ -125,5 +125,13 @@ async def update_book(updated_book=Body()):
 async def delete_book(book_title: str):
     for book in BOOKS:
         if book.get('title').casefold() == book_title.casefold():
-            BOOKS.pop(i)
-            break
+            BOOKS.remove(book)
+            return  {
+                "message": "Book deleted successfully",
+                "book": book
+            }
+
+    raise HTTPException(
+        status_code=404,
+        detail=f"Book title '{book_title}' not found"
+    )
