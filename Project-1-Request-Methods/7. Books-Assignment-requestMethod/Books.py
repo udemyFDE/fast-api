@@ -24,7 +24,7 @@ async def read_all_books():
 
 
 # GET Method with path parameter
-@app.get("/books/{author}")
+@app.get("/books/by_author/{author}")
 
 async def read_book(author: str):
     books_to_return = []
@@ -43,7 +43,7 @@ async def read_book(author: str):
 # OR
 
 # # GET Method with query parameter
-# @app.get("/books/")
+# @app.get("/books/by_author/")
 #
 # async def read_author(author: str):
 #     books_to_return = []
