@@ -77,8 +77,11 @@ BOOKS = [
 async def read_all_books():
     return BOOKS
 
-@app.get("/books/{published_year}")
+# Get by published year
 
+# @app.get("/books/{published_year}")
+
+@app.get("/books/published_year/")
 async def read_book_year(published_year: int):
     books_to_return = []
     # for i in range(len(BOOKS)):
@@ -88,3 +91,60 @@ async def read_book_year(published_year: int):
         if book.published_date == published_year:
             books_to_return.append(book)
     return books_to_return
+
+
+
+# Fetch book by Id using path parameter
+@app.get("/books/{book_id}")
+
+async def read_book(book_id: int):
+    for book in BOOKS:
+        if book_id == book.id:
+            return book
+
+
+# Fetch books by rating
+
+# path parameter -- Order matters
+# to use it keep this function before the Id function above or comment it
+# @app.get("/books/{rating}")
+# async def read_books_by_rating(rating: int):
+#     return [book for book in BOOKS if book.rating >= rating]
+
+# query parameter
+@app.get("/books/")
+async def read_books_by_rating(rating: int):
+    return [book for book in BOOKS if book.rating >= rating]
+
+
+# POST using Pydantic model as the input for validating the request to add the book
+# due to BookRequest (pydantic model class) we see the schema that needs to be passed
+@app.post("/create_book")
+
+async def create_book(book_request: BookRequest):
+    new_book = Book(**book_request.model_dump())
+    BOOKS.append(find_book_id(new_book))
+
+
+def find_book_id(book: Book):
+    book.id = 1 if len(BOOKS) == 0 else BOOKS[-1].id + 1
+    return book
+
+
+# PUT method to update the BOOKS using Id
+@app.put("/books/update_book")
+
+async def update_book(book: BookRequest):   # BookRequest is a pydantic object
+    for i in range(len(BOOKS)):
+        if BOOKS[i].id == book.id:
+            BOOKS[i] = book
+
+
+# DELETE method to delete the book using Id
+@app.delete("/books/{book_id}")
+
+async def delete_book(book_id: int):
+    for i in range(len(BOOKS)):
+        if BOOKS[i].id == book_id:
+            BOOKS.pop(i)
+            break
