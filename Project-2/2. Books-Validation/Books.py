@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Body
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import Optional
+
 
 app = FastAPI()
 
@@ -19,12 +21,15 @@ class Book:
         self.rating = rating
 
 # Pydantic Model for data validation
+# Need to import BaseModel, not accept the values of different data type than defined
+# import Field, to add validation of values. Can be seen in schema under the respective Method in Swagger UI
+# if the values are passed than what is accepted, error -- unprocessable entity
 class BookRequest(BaseModel):
-    id: int
-    title: str
-    author: str
-    description: str
-    rating: int
+    id: Optional[int] = None
+    title: str = Field(min_length=3)
+    author: str = Field(min_length=1)
+    description: str = Field(min_length=1, max_length=100)
+    rating: int = Field(ge=1, lt=6)
 
 
 BOOKS = [
@@ -53,7 +58,8 @@ async def create_book(book_request: BookRequest):
     # ** convert the request to Book object by expanding the dictionary keys and values into the arguments required for the constructor
     new_book = Book(**book_request.model_dump())
     # print(type(new_book))   # now we get type as Book instead of BookRequest <class 'Books.Book'>
-    BOOKS.append(new_book)
+    # BOOKS.append(new_book)
+    BOOKS.append(find_book_id(new_book))    # the book Id is passed from find_book_id function below
 
 # We're accepting a request of BookRequest from pedantic, so our body must match this BookRequest object.
 # We are transforming this BookRequest into a book object that we're using as our source of truth.
@@ -61,6 +67,16 @@ async def create_book(book_request: BookRequest):
 # we can add even more data validation for each field
 # So our ID or title author description and rating saying that a rating can't be over 100 or IDs can't
 # be -50.
+
+
+# Book is the class object defined above which give the properties to be initialized
+def find_book_id(book: Book):
+    book.id = 1 if len(BOOKS) == 0 else BOOKS[-1].id + 1
+    # if len(BOOKS) > 0:
+    #     book.id = BOOKS[-1].id + 1
+    # else:
+    #     book.id = 1
+    return book
 
 
 
