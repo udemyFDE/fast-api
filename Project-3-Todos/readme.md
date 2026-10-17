@@ -1,6 +1,7 @@
 ## Project three
 
 * we will be switching our focus to doing `TODOS` instead of using `BOOKS` as our primary object.
+* To create this project, in the `PyCharm` &rarr; `right click` on the parent folder where we have the virtual environment &rarr; New &rarr; `Python Package` &rarr; Name the project (eg: project-3-Todos)
 
 * New information will include:
     - `Database`
