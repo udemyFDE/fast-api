@@ -58,13 +58,13 @@ BOOKS = [
 async def read_all_books():
     return BOOKS
 
-# Fetch book by Id using path parameter
-@app.get("/books/{book_id}")
-
-async def read_book(book_id: int):
-    for book in BOOKS:
-        if book_id == book.id:
-            return book
+# # Fetch book by Id using path parameter
+# @app.get("/books/{book_id}")
+#
+# async def read_book(book_id: int):
+#     for book in BOOKS:
+#         if book_id == book.id:
+#             return book
 
 
 # Fetch books by rating
@@ -102,3 +102,13 @@ async def update_book(book: BookRequest):   # BookRequest is a pydantic object
     for i in range(len(BOOKS)):
         if BOOKS[i].id == book.id:
             BOOKS[i] = book
+
+
+# DELETE method to delete the book using Id
+@app.delete("/books/{book_id}")
+
+async def delete_book(book_id: int):
+    for i in range(len(BOOKS)):
+        if BOOKS[i].id == book_id:
+            BOOKS.pop(i)
+            break
