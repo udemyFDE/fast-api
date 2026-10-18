@@ -8,6 +8,7 @@ import the engine (variable name for create_engine() in database.py) from databa
 '''
 
 from fastapi import FastAPI, Depends, HTTPException, Path
+from pydantic import BaseModel, Field
 from starlette import status
 
 # import models # if models.py is in the same folder as of main.py
@@ -43,8 +44,17 @@ db_dependency = Annotated[Session, Depends(get_db)]
 # Session is imported from sqlalchemy.orm
 # Depends is imported from fastapi
 
+# Pydantic model to validate the POST/PUT requests
+class TodoRequest(BaseModel):
+    title: str = Field(min_length=3, max_length=25)
+    description: str = Field(min_length=1, max_length=100)
+    priority: int = Field(ge=1, le=5)
+    complete: bool
+    # didn't add the ID as it is defined as a primary key and index in the models.py
+    # the DB will take care of the ID to increment automatically for each create request
+    # sql alchemy will take care of this.
 
-# read all the records in the DB
+# read all the records in the DB (GET)
 @app.get("/", status_code=status.HTTP_200_OK)
 
 async def read_all(db: db_dependency):
@@ -61,11 +71,11 @@ async def read_all(db: db_dependency):
         detail={"No data found"}
     )
 
-# Get a record using the ID
+# Get a record using the ID as path parameter (GET)
 
 @app.get("/todo/{todo_id}", status_code=status.HTTP_200_OK)
 
-async def read_todo(db: db_dependency, todo_id: int = Path(gt=0, le=len(db.query(Todos)))):
+async def read_todo(db: db_dependency, todo_id: int = Path(gt=0)):
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
     if todo_model is not None:
         return todo_model
@@ -73,3 +83,37 @@ async def read_todo(db: db_dependency, todo_id: int = Path(gt=0, le=len(db.query
         status_code=404,
         detail=f"No record found with Id: {todo_id}"
     )
+
+# Create a record (POST)
+
+@app.post("/todo", status_code=status.HTTP_201_CREATED)
+
+async def create_todo(db: db_dependency, todo_request: TodoRequest):
+    todo_model = Todos(**todo_request.model_dump())
+
+    db.add(todo_model)
+    db.commit()
+
+
+# Update a record (PUT)
+
+@app.put("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
+
+async def read_todo(db: db_dependency, todo_request: TodoRequest, todo_id: int = Path(gt=0)):
+    todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
+
+    if todo_model is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No record found with the Id: {todo_id}"
+        )
+
+    todo_model.title = todo_request.title
+    todo_model.description = todo_request.description
+    todo_model.priority = todo_request.priority
+    todo_model.complete = todo_request.complete
+    # this will make sure the sql alchemy knows the same record fetched above is updated
+    # and not create a new record or a duplicate
+
+    db.add(todo_model)
+    db.commit()
