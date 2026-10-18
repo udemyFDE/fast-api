@@ -39,3 +39,17 @@ sqlite3 todos.db
     ```
     select * from todos;
     ```
+
+* Can select the mode by running this
+    ```
+    .mode <xxxx>
+    ```
+    eg:
+    > .mode column
+
+    > .mode markdown
+
+    > .mode box
+
+    > .mode table
+
