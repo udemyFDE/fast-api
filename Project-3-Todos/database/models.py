@@ -8,8 +8,10 @@ first thing we need to import is inside our database.py
 We created a Base from our declarative_base and we want to import that into our models.
 And that just means that we are going to be creating this model for our database.py file.
 '''
-from math import trunc
 
+# as database.py is inside the database folder which also has model.py
+# main.py is outside th database folder, to import Base into models.py from database.py
+# so need to use .database as it explicitly pick the database.py
 from .database import Base
 # from database import Base # if database.py, models.py and main.py are is same folder
 from sqlalchemy import Column, Integer, String, Boolean
