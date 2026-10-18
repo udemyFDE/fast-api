@@ -7,7 +7,9 @@ import the models (name of the file, here we used models.py) which we use to def
 import the engine (variable name for create_engine() in database.py) from database
 '''
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException, Path
+from starlette import status
+
 # import models # if models.py is in the same folder as of main.py
 from database import models
 from database.models import Todos
@@ -36,11 +38,38 @@ def get_db():
         db.close()
 
 
-@app.get("/")
+db_dependency = Annotated[Session, Depends(get_db)]
+# Annotated is imported from typing
+# Session is imported from sqlalchemy.orm
+# Depends is imported from fastapi
 
-async def read_all(db: Annotated[Session, Depends(get_db)]):
-    # Annotated is imported from typing
-    # Session is imported from sqlalchemy.orm
-    # Depends is imported from fastapi
-    return db.query(Todos).all()
+
+# read all the records in the DB
+@app.get("/", status_code=status.HTTP_200_OK)
+
+async def read_all(db: db_dependency):
+
+    # return db.query(Todos).all()
     # Todos need to be imported from models.py, which has the Todos Class defined
+    # the app will run the select * from todos query
+
+    get_todos = db.query(Todos).all()
+    if get_todos is not None:
+        return get_todos
+    raise HTTPException(
+        status_code=404,
+        detail={"No data found"}
+    )
+
+# Get a record using the ID
+
+@app.get("/todo/{todo_id}", status_code=status.HTTP_200_OK)
+
+async def read_todo(db: db_dependency, todo_id: int = Path(gt=0, le=len(db.query(Todos)))):
+    todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
+    if todo_model is not None:
+        return todo_model
+    raise HTTPException(
+        status_code=404,
+        detail=f"No record found with Id: {todo_id}"
+    )
