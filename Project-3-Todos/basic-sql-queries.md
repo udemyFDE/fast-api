@@ -1,5 +1,7 @@
 ### Basic SQL queries
 
+* To run the SQL queries against the db file created by the app, ensure the working directory is changed to the folder where the 
+
 * `Insert/Create/Add` data to a dabase table (todos --> example table name in the below queries)
 
 ```
