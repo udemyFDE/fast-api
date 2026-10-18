@@ -17,3 +17,25 @@ sqlite3 .\database\todos.db
 ```
 sqlite3 todos.db
 ```
+
+* Check schema
+```
+.schema
+```
+> This will show the info about the tables that we have in the database.
+
+* Add records
+    ```
+    insert into todos (title, description, priority, complete) values ('Go to the store', 'pickup eggs', 5, False);
+    ```
+- Adding multiple values
+    ```
+    insert into todos (title, description, priority, complete) 
+    values ('Cut the lawn', 'grass is getting long', 3, False),
+           ('Feed the dog', 'he is getting hungry', 5, False);
+    ```
+
+* Read the data
+    ```
+    select * from todos;
+    ```
