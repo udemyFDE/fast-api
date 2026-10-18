@@ -114,6 +114,6 @@ async def read_todo(db: db_dependency, todo_request: TodoRequest, todo_id: int =
     todo_model.complete = todo_request.complete
     # this will make sure the sql alchemy knows the same record fetched above is updated
     # and not create a new record or a duplicate
-
+    
     db.add(todo_model)
     db.commit()
