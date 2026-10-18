@@ -21,7 +21,20 @@
 **Creating a Todo Table**
 - we will create a new `Todo` table model for our application.
 - We will be using these Todos to save records throughout this project.
+- Once we have the required `database.py` and `models.py` files created in database folder, create a `main.py` in project folder and run the below commands.
 
+```
+cd <project folder>
+```
+eg:
+> cd ./project-3-Todos
+
+```
+uvicorn main:app --reload
+```
+> This will create a .db file in the location (SQLALCHEMY_DATABASE_URL) specified in database.py file
+
+- Once the db file is created, install `SQLite` to connect and manage the data.
 
 **General Info**
 

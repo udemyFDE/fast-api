@@ -5,7 +5,8 @@
 ```
 pip install sqlalhemy
 ```
+>This will also creat __init_.py file
 
-* In the same folder of project-3, create a python file (database.py, if needed can create a folder for database) which will be used to connect, create.... database.
+* In the same folder of project-3, create a python file (database.py, if needed can create a folder for database) which will be used to connect, create.... database. In case of separate folder copy `__init_.py file` to this folder as well.
 
 * Inside the database.py file, we need to create the logic
