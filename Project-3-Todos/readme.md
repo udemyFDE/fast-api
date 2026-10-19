@@ -120,3 +120,16 @@ from fastapi.security import OAuth2PasswordRequestForm
         
     ![alt text](JWT-example.png)
             
+    - With all of this combined, we get the Json web token string which is unique to the client based on the authentication of the user that has logged in.
+
+    ![alt text](JWT-example-2.png)
+
+    - However, the JWT is safe as long as the client does not find out the secret key, which in this example is learn online. If the client was able to discover the secret key, they would have so much more control over the data. If you visit https://jwt.io, you can encode and decode your very own Json web tokens.
+
+    - If any of the information on the JWT has changed, the server will be able to identify that something was altered. we can see an invalid signature.
+
+* **So what are some practical use cases?**
+
+    - A single company or enterprise has multiple different applications that many different users work with and do not want your user to have to sign into each application. This is possible if all apps share the same secret. This means servers of all apps would be able to handle decoding the Json web token and know exactly who the user is that is trying to perform the action.
+
+    - Using JWT is extremely popular in modern architectures like microservices, where each API may be loosely coupled and in some cases completely stateless but require user information. These micro services or micro APIs can find the user by decoding tokens and never having to implement authentication or authorization within the specific API.
