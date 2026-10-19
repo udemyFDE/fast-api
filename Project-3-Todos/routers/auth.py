@@ -15,9 +15,19 @@ from sqlalchemy.util import deprecated
 from sqlalchemy.orm import Session
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm
+from jose import jwt
+from datetime import timedelta, datetime, timezone
 
 # Instead of app = FastAPI(), we have this
 router = APIRouter()
+
+# JWT require a secret and algorithm, both will work together to add a signature for JWT
+# and ensure the JWT is secure and authorized
+# for secret can use this command --> python -c "import secrets; print(secrets.token_hex(32))"
+# OR --> openssl rand -hex 32
+SECRET_KEY = 'bede58bf90067cf4c4cc693df5c99804ed0bf08ce43949ea32b4925bdc5c1beb'
+ALGORITHM = 'HS256'
+
 
 # we can creat the bcrypt context and use it
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
@@ -32,6 +42,10 @@ class CreateUserRequest(BaseModel):
     # Id is not added here, as SQLAlchemy will take care of incrementing the IDs for every user being added
     # and is_active has the default set to True in the table definition in model.py
 
+# This class is to get more infor about the token after authentication
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
 # function to authenticate the user
 def authenticate_user(username: str, password: str, db):
@@ -42,9 +56,17 @@ def authenticate_user(username: str, password: str, db):
         # hash the provide password and compare with the hashed password in database
         # return false if password do not match
         return False
-    return True
+    # return True
+    return user
 
-
+# function to create access token for JWT
+# need to import timedelta, datetime and timezone from datetime
+def create_access_token(username: str, user_id: int, expires_delta=timedelta):
+    encoded_value = {'sub': username, 'id': user_id}
+    # expires = datetime.utcnow() # deprecated
+    expires = datetime.now(timezone.utc) + expires_delta
+    encoded_value.update({'exp': expires})
+    return jwt.encode(encoded_value, SECRET_KEY, algorithm=ALGORITHM)
 
 # function to connect to the DB
 def get_db():
@@ -93,16 +115,17 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
 ##########################
 
 # Get a token
-@router.post("/token")
+@router.post("/token", response_model=Token)
 
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
                                  db: db_dependency):
     user = authenticate_user(form_data.username, form_data.password, db)
     if not user:
         return "Failed Authentication"
-    return "Successful Authentication"
-
-
+    token = create_access_token(user.username, user.id, timedelta(minutes=20))
+    # return "Successful Authentication"
+    # return token
+    return {'access_token': token, 'token_type': 'bearer'}
 
 
 # Fetch/Read the user (GET)

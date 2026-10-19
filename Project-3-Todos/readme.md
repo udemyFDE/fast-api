@@ -14,7 +14,19 @@
     - `Authorization`
         - roles and responsibilities where a user can be an admin and they get certain API endpoints available that other users do not get.
 
-        > [_How Authentication and Authorization work in FastAPI_](#authentication-and-authorization-in-fastapi)
+        - To know more:
+            - [_How Authentication and Authorization work in FastAPI_](#authentication-and-authorization-in-fastapi)
+            - [_Using JWT Authorization_](#what-is-a-json-web-token-jwt)
+
+        - To use JWT authorizatoin, we need to install the below library and import the functionality to `auth.py` file
+
+        ```
+        pip install "python-jose[cryptography]"
+        ```
+
+        ```
+        from jose import jwt
+        ```
     - `Hashing Passwords`
         - As we deal with user authentication and authorization, we need to hash the password before we save them into the database.
         - step by step on how to create a hashing algorithm for our application to be able to hash all of the passwords that we save as records.
@@ -77,56 +89,57 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 * once we import this request form, we now need to use it as a dependency injection for our API endpoint. Also, add the database as another dependency (same as for create user endpoint). 
 
-* **What is a Json web token (JWT)?**
-    - `JWT` is one of the most popular bearer tokens and authorization protocols within APIs.
+#### What is a Json web token (JWT)?**
 
-    - It is a self-contained way to se`curely transmit data and information` between two or more parties using a JSON object.
+- `JWT` is one of the most popular bearer tokens and authorization protocols within APIs.
 
-    - A Json web token can be trusted because each JWT can be `digitally signed`, which in turn allows a server to know if the Json object has been changed at all from the client.
+- It is a self-contained way to se`curely transmit data and information` between two or more parties using a JSON object.
 
-    - JWT is `not an authentication method` like basic and digest, `but an authorization method` which allows the client and server to maintain a relationship without having to log in each request.
+- A Json web token can be trusted because each JWT can be `digitally signed`, which in turn allows a server to know if the Json object has been changed at all from the client.
 
-    - JWT is a great way for information to be exchanged between the server and client.
-        - Once a user logs in, the server will return a Json web token, which is a string of characters that, when decoded, shows information about the client and user.
+- JWT is `not an authentication method` like basic and digest, `but an authorization method` which allows the client and server to maintain a relationship without having to log in each request.
 
-        - Each time a request comes from the same client. After a successful authentication, the client will send the Json web token and the server will validate the token each request.
+- JWT is a great way for information to be exchanged between the server and client.
+    - Once a user logs in, the server will return a Json web token, which is a string of characters that, when decoded, shows information about the client and user.
 
-    - All Json web tokens have similar structures.
-        - A Json web token is created by three separate parts separated by dots(.) which include &rarr; a `header`, `payload` and `signature`, Therefore, a Json web token being sent between the client and the server willhave unique characters for that specific client
-        ```
-        <header>.<payload>.<signature> 
-        ```
+    - Each time a request comes from the same client. After a successful authentication, the client will send the Json web token and the server will validate the token each request.
 
-        - `JWT Header`
-            - consist of 2 parts &rarr; `algorithm` for signing and the `type` of token.
-            - The JWT header is then encoded using Base64 to create the first part of the Json web token.
-        - `JWT Payload`
-            - consists of the `actual data` of the user and or additional information. The payloads data contains `claims`, and there are `three` types of claims.
-                - `register` &rarr; predefined, recommended but not mandatory &rarr; top 3 include:
-                    - `iss` &rarr; stands for issuer. This claim identifies the principal that issued the JWT.
-                    - `sub` &rarr; stands for subject and holds statements about the subject. The subject value must be scoped either locally or globally unique. Think of a subject as an ID for the Json web token.
-                    - `exp` &rarr; stands for expiration time, which is when the JWT expires. This claim makes sure that the current date and time is before the expiration date and time of the token. Expiration is not mandatory, but extremely useful.
-                        - Always enure there is some type of default expiration date attached to the JWT. Because if the token never expires, then anyone who has a JWT will be authorized by the server.
-                
-                - `public`
-                - `private`.
+- All Json web tokens have similar structures.
+    - A Json web token is created by three separate parts separated by dots(.) which include &rarr; a `header`, `payload` and `signature`, Therefore, a Json web token being sent between the client and the server willhave unique characters for that specific client
+    ```
+    <header>.<payload>.<signature> 
+    ```
 
-            - The JWT payload is then encoded using Base64 to create the second part of the JWT.
-
-        - `JWT Signature`
-            - third and final part of a Json web token.
-            - The JWT signature is created by using the algorithm in the header to hash out the encoded header, encoded payload with secret.
-            - The secret can be anything but is saved somewhere on the server that the client does not have access to.
-        
-    ![alt text](JWT-example.png)
+    - `JWT Header`
+        - consist of 2 parts &rarr; `algorithm` for signing and the `type` of token.
+        - The JWT header is then encoded using Base64 to create the first part of the Json web token.
+    - `JWT Payload`
+        - consists of the `actual data` of the user and or additional information. The payloads data contains `claims`, and there are `three` types of claims.
+            - `register` &rarr; predefined, recommended but not mandatory &rarr; top 3 include:
+                - `iss` &rarr; stands for issuer. This claim identifies the principal that issued the JWT.
+                - `sub` &rarr; stands for subject and holds statements about the subject. The subject value must be scoped either locally or globally unique. Think of a subject as an ID for the Json web token.
+                - `exp` &rarr; stands for expiration time, which is when the JWT expires. This claim makes sure that the current date and time is before the expiration date and time of the token. Expiration is not mandatory, but extremely useful.
+                    - Always enure there is some type of default expiration date attached to the JWT. Because if the token never expires, then anyone who has a JWT will be authorized by the server.
             
-    - With all of this combined, we get the Json web token string which is unique to the client based on the authentication of the user that has logged in.
+            - `public`
+            - `private`.
 
-    ![alt text](JWT-example-2.png)
+        - The JWT payload is then encoded using Base64 to create the second part of the JWT.
 
-    - However, the JWT is safe as long as the client does not find out the secret key, which in this example is learn online. If the client was able to discover the secret key, they would have so much more control over the data. If you visit https://jwt.io, you can encode and decode your very own Json web tokens.
+    - `JWT Signature`
+        - third and final part of a Json web token.
+        - The JWT signature is created by using the algorithm in the header to hash out the encoded header, encoded payload with secret.
+        - The secret can be anything but is saved somewhere on the server that the client does not have access to.
+    
+![alt text](JWT-example.png)
+        
+- With all of this combined, we get the Json web token string which is unique to the client based on the authentication of the user that has logged in.
 
-    - If any of the information on the JWT has changed, the server will be able to identify that something was altered. we can see an invalid signature.
+![alt text](JWT-example-2.png)
+
+- However, the JWT is safe as long as the client does not find out the secret key, which in this example is learn online. If the client was able to discover the secret key, they would have so much more control over the data. If you visit https://jwt.io, you can encode and decode your very own Json web tokens.
+
+- If any of the information on the JWT has changed, the server will be able to identify that something was altered. we can see an invalid signature.
 
 * **So what are some practical use cases?**
 
