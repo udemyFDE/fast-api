@@ -16,6 +16,13 @@
     - `Hashing Passwords`
         - As we deal with user authentication and authorization, we need to hash the password before we save them into the database.
         - step by step on how to create a hashing algorithm for our application to be able to hash all of the passwords that we save as records.
+        - we need to install the below dependencies &rarr; `passlib` and `bcrpyt==4.0.1 (specific version)`
+
+        ```
+        pip install passlib bcrypt==4.0.1
+        ```
+
+        > We need to use this specific version of bcrypt becuase the passwords hashed by one version
 
 
 **Creating a Todo Table**

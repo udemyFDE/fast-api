@@ -14,7 +14,20 @@ And that just means that we are going to be creating this model for our database
 # so need to use .database as it explicitly pick the database.py
 from .database import Base
 # from database import Base # if database.py, models.py and main.py are is same folder
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+
+
+class Users(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True)
+    username = Column(String, unique=True)
+    first_name = Column(String)
+    last_name = Column(String)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
+    role = Column(String)
 
 class Todos(Base):
     __tablename__ = 'todos'
@@ -26,6 +39,7 @@ class Todos(Base):
     description = Column(String)
     priority = Column(Integer)
     complete = Column(Boolean, default=False)   # 0 = False, 1 = True in a Database
+    owner_id = Column(Integer, ForeignKey("users.id")) # to reference the user ID to todos
     # ID is going to be a new column within our table and it's going to be an integer.
     # We then want to say primary key equals true because our ID is going to be the primary key, which is
     # a unique ID or the unique identifier for each record.
