@@ -13,6 +13,8 @@
         - And that ultimately means being able to create users that have a username and password.
     - `Authorization`
         - roles and responsibilities where a user can be an admin and they get certain API endpoints available that other users do not get.
+
+        > [_How Authentication and Authorization work in FastAPI_](#authentication-and-authorization-in-fastapi)
     - `Hashing Passwords`
         - As we deal with user authentication and authorization, we need to hash the password before we save them into the database.
         - step by step on how to create a hashing algorithm for our application to be able to hash all of the passwords that we save as records.
@@ -56,3 +58,65 @@ uvicorn main:app --reload
     - `.dict()` function is now renamed to `.model_dump()`
     - `schema_extra` function within a Config class is now renamed to `json_schema_extra`
     - Optional variables need a `=None` example: `id: Optional[int] = None`
+
+### Authentication and Authorization in FastAPI
+
+* Allow a user to be able to authenticate themselves so they can sign in as this user uing the details saved in the database.
+
+* Create an API endpoint, in `auth.py` file, as a `POST` request method with a path of `/token`. A token is what we're going to return back to the user which will have all of the information about the user inside. And this token is going to be a `JWT`, which is a JSON web token. This require to install a dependency `python-multipart`
+
+```
+pip install python-multipart
+```
+> we can now submit forms to our application. But we're not going to be using a normal fast API form. We're going to be using something called OAuth to password request form. It's a special kind of form that will be slightly more secure and will have its own portal on Swagger. Where we will be able to get the username and password for the request.
+
+* After installing, import this functionality in `auth.py`
+```
+from fastapi.security import OAuth2PasswordRequestForm
+```
+
+* once we import this request form, we now need to use it as a dependency injection for our API endpoint. Also, add the database as another dependency (same as for create user endpoint). 
+
+* **What is a Json web token (JWT)?**
+    - `JWT` is one of the most popular bearer tokens and authorization protocols within APIs.
+
+    - It is a self-contained way to se`curely transmit data and information` between two or more parties using a JSON object.
+
+    - A Json web token can be trusted because each JWT can be `digitally signed`, which in turn allows a server to know if the Json object has been changed at all from the client.
+
+    - JWT is `not an authentication method` like basic and digest, `but an authorization method` which allows the client and server to maintain a relationship without having to log in each request.
+
+    - JWT is a great way for information to be exchanged between the server and client.
+        - Once a user logs in, the server will return a Json web token, which is a string of characters that, when decoded, shows information about the client and user.
+
+        - Each time a request comes from the same client. After a successful authentication, the client will send the Json web token and the server will validate the token each request.
+
+    - All Json web tokens have similar structures.
+        - A Json web token is created by three separate parts separated by dots(.) which include &rarr; a `header`, `payload` and `signature`, Therefore, a Json web token being sent between the client and the server willhave unique characters for that specific client
+        ```
+        <header>.<payload>.<signature> 
+        ```
+
+        - `JWT Header`
+            - consist of 2 parts &rarr; `algorithm` for signing and the `type` of token.
+            - The JWT header is then encoded using Base64 to create the first part of the Json web token.
+        - `JWT Payload`
+            - consists of the `actual data` of the user and or additional information. The payloads data contains `claims`, and there are `three` types of claims.
+                - `register` &rarr; predefined, recommended but not mandatory &rarr; top 3 include:
+                    - `iss` &rarr; stands for issuer. This claim identifies the principal that issued the JWT.
+                    - `sub` &rarr; stands for subject and holds statements about the subject. The subject value must be scoped either locally or globally unique. Think of a subject as an ID for the Json web token.
+                    - `exp` &rarr; stands for expiration time, which is when the JWT expires. This claim makes sure that the current date and time is before the expiration date and time of the token. Expiration is not mandatory, but extremely useful.
+                        - Always enure there is some type of default expiration date attached to the JWT. Because if the token never expires, then anyone who has a JWT will be authorized by the server.
+                
+                - `public`
+                - `private`.
+
+            - The JWT payload is then encoded using Base64 to create the second part of the JWT.
+
+        - `JWT Signature`
+            - third and final part of a Json web token.
+            - The JWT signature is created by using the algorithm in the header to hash out the encoded header, encoded payload with secret.
+            - The secret can be anything but is saved somewhere on the server that the client does not have access to.
+        
+    ![alt text](JWT-example.png)
+            
