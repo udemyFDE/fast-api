@@ -17,4 +17,4 @@
     >**Note:** After having all the content of main.py to router file and leaving the main.py file with only router reference, the imports in the router file need to be verified for appropriate directory structure. No issue if followed the structure as in this repo
 
 
-* We also have `admin.py` which will allow the admin users to be able to access all the information of all users, whereas `auth.py` allow the users to send requests only to manage their respective records.
+* We also have `admin.py` which will allow the admin users to be able to manage all the information of all users, whereas `auth.py` allow the users to send requests only to manage their respective records.
