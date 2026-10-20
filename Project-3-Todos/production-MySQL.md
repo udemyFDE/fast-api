@@ -1,4 +1,6 @@
-* [_setup PostgreSQL_](#setup-and-installation)
+## Introduction
+
+* [_setup MySQL_](#setup-and-installation)
 * [_create a table_](#create-a-database-table)
 * [_connect to FastAPI_](#connect-to-fastapi)
 
