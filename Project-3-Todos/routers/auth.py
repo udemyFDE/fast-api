@@ -87,8 +87,10 @@ def authenticate_user(username: str, password: str, db):
 
 # function to create access token for JWT
 # need to import timedelta, datetime and timezone from datetime
-def create_access_token(username: str, user_id: int, expires_delta=timedelta):
-    encoded_value = {'sub': username, 'id': user_id}
+# added the role to allow certain endpoints to work only for admin users
+# In the users table we also added a column for role in model.py to be passed while creating the user
+def create_access_token(username: str, user_id: int, role: str, expires_delta=timedelta):
+    encoded_value = {'sub': username, 'id': user_id, 'role': role}
     # expires = datetime.utcnow() # deprecated
     expires = datetime.now(timezone.utc) + expires_delta
     encoded_value.update({'exp': expires})
@@ -108,13 +110,14 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
         payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
         username: str = payload.get('sub')
         user_id: int = payload.get('id')
+        user_role: str = payload.get('role')
         if username is None or user_id is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Could not validate the user"
             )
 
-        return {"username": username, "id": user_id}
+        return {"username": username, "id": user_id, "role": user_role}
         # when referring this function, need to use the same keys declared in 'return' above
 
     except JWTError:
@@ -174,7 +177,7 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Could not validate the user `{form_data.username}`"
         )
-    token = create_access_token(user.username, user.id, timedelta(minutes=20))
+    token = create_access_token(user.username, user.id, user.role, timedelta(minutes=20))
     # return "Successful Authentication"
     # return token
     return {'access_token': token, 'token_type': 'bearer'}

@@ -10,7 +10,7 @@ import the engine (variable name for create_engine() in database.py) from databa
 from fastapi import FastAPI
 from database import models
 from database.database import engine
-from routers import auth, todos
+from routers import auth, todos, admin
 
 app = FastAPI()
 
@@ -23,5 +23,6 @@ models.Base.metadata.create_all(bind=engine)
 app.include_router(auth.router)
 
 app.include_router(todos.router)
+app.include_router(admin.router)
 
 # Instead of creating api endpoints for app, we have the api endpoints from routers

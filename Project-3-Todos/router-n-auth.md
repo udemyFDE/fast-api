@@ -15,3 +15,6 @@
     - For scalable routers -- keep only router details in `main.py` while all the APIs sit inside the router files `todos.py` &rarr; `for application APIs` and `auth.py` &rarr; `for authentication APIs`. While using routers, `@app` will be replaced with `@router` for all API endpoints in the router file. And now the `main.py` file will have `eg: app = FastAPI()` while the router files will have `eg: router = APIRouter()`.
 
     >**Note:** After having all the content of main.py to router file and leaving the main.py file with only router reference, the imports in the router file need to be verified for appropriate directory structure. No issue if followed the structure as in this repo
+
+
+* We also have `admin.py` which will allow the admin users to be able to access all the information of all users, whereas `auth.py` allow the users to send requests only to manage their respective records.

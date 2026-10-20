@@ -1,6 +1,7 @@
 '''
 
-Copy all from main.py
+This file is the root of application endpoints
+Has the same content of main-before-routers.py
 remove app = FastAPI() and add router = APIRouter()
 replace @app with @router
 
