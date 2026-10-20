@@ -22,7 +22,7 @@ router = APIRouter(
     prefix="/admin",
     tags=['admin']
     # divide our application with a new title of auth that will show all the auth APIs
-    # and then each API endpoint within this auth,py file is going to start with '/auth'.
+    # and then each API endpoint within this auth,py file is going to start with '/admin'.
 )
 
 def get_db():

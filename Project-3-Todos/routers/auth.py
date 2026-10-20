@@ -34,7 +34,7 @@ SECRET_KEY = 'bede58bf90067cf4c4cc693df5c99804ed0bf08ce43949ea32b4925bdc5c1beb'
 ALGORITHM = 'HS256'
 
 
-# we can creat the bcrypt context and use it
+# we can create the bcrypt context and use it
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
 # token context which has the URL that the client will send to the application
@@ -79,7 +79,7 @@ def authenticate_user(username: str, password: str, db):
     if not user:
         return False # if the user is not found
     if not bcrypt_context.verify(password, user.hashed_password):
-        # hash the provide password and compare with the hashed password in database
+        # hash the provided password and compare with the hashed password in database
         # return false if password do not match
         return False
     # return True
@@ -103,7 +103,7 @@ def create_access_token(username: str, user_id: int, role: str, expires_delta=ti
 # OAuth2 bearer token in our client call.
 # need to import this function to todos.py file for the application
 # add the Depends() for 'oauth2_bearer', otherwise the lock icon will not be visible in swagger
-# If no Depends() for 'oauth2_bearer' is used, we see a field to enter the token which will be passe
+# If no Depends() for 'oauth2_bearer' is used, we see a field to enter the token which will be passed
 # as a query parameter and will fail
 async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
     try:
@@ -181,10 +181,3 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
     # return "Successful Authentication"
     # return token
     return {'access_token': token, 'token_type': 'bearer'}
-
-
-# Fetch/Read the user (GET)
-# @router.get("/auth/")
-#
-# async def get_user():
-#     return {"user": "Authenticated"}
