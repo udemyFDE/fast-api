@@ -101,7 +101,7 @@ async def create_todo(db: db_dependency, todo_request: TodoRequest):
 
 @app.put("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
 
-async def read_todo(db: db_dependency, todo_request: TodoRequest, todo_id: int = Path(gt=0)):
+async def update_todo(db: db_dependency, todo_request: TodoRequest, todo_id: int = Path(gt=0)):
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
 
     if todo_model is None:
@@ -125,7 +125,7 @@ async def read_todo(db: db_dependency, todo_request: TodoRequest, todo_id: int =
 
 @app.delete("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
 
-async def read_todo(db: db_dependency, todo_id: int = Path(gt=0)):
+async def delete_todo(db: db_dependency, todo_id: int = Path(gt=0)):
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
 
     if todo_model is None:

@@ -44,10 +44,33 @@ db_dependency = Annotated[Session, Depends(get_db)]
 user_dependency = Annotated[dict, Depends(get_current_user)]
 
 
+# GET all records of all users as an Admin user
 @router.get("/todo", status_code=status.HTTP_200_OK)
 
 async def read_all(user: user_dependency, db: db_dependency):
-    if user in None or user.get('role').lower() != 'admin':
+    if user is None or user.get('role').lower() != 'admin':
         # role in get should be the same key used in get_current_user function in auth.py
         raise HTTPException(status_code=401, detail="Not Authorized")
     return db.query(Todos).all()
+
+# DELETE any record as an Admin user
+
+@router.delete("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
+
+async def delete_todo(user: user_dependency, db: db_dependency, todo_id: int = Path(gt=0)):
+    if user is None or user.get('role').lower() != 'admin':
+        # role in get should be the same key used in get_current_user function in auth.py
+        raise HTTPException(status_code=401, detail="Not Authorized")
+    todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
+
+    if todo_model is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No record found with the Id `{todo_id}`"
+        )
+
+    # db.query(Todos).filter(Todos.id == todo_id).delete()
+    db.query(Todos).filter(Todos.id == todo_id).delete()
+    db.commit()
+
+
