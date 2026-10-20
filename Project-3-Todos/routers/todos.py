@@ -147,5 +147,6 @@ async def read_todo(user: user_dependency, db: db_dependency, todo_id: int = Pat
             detail=f"No record found with the Id `{todo_id}` for user '{user.get('username')}'"
         )
 
-    db.query(Todos).filter(Todos.id == todo_id).delete()
+    # db.query(Todos).filter(Todos.id == todo_id).delete()
+    db.query(Todos).filter(Todos.id == todo_id).filter(Todos.owner_id == user.get('id')).delete()
     db.commit()
