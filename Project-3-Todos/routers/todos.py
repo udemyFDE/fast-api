@@ -61,11 +61,12 @@ async def read_all(user: user_dependency, db: db_dependency):
     # the app will run the select * from todos query
     # get_todos = db.query(Todos).all()
     get_todos = db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
-    if get_todos is not None:
+    # if get_todos is not None:
+    if get_todos:
         return get_todos
     raise HTTPException(
         status_code=404,
-        detail={f"No data found for the user '{user.get('username')}'"}
+        detail=f"No data found for the user '{user.get('username')}'"
     )
 
 # Get a record (GET) using the ID as path parameter
@@ -143,7 +144,7 @@ async def read_todo(user: user_dependency, db: db_dependency, todo_id: int = Pat
     if todo_model is None:
         raise HTTPException(
             status_code=404,
-            detail=f"No record found with the Id: {todo_id}"
+            detail=f"No record found with the Id `{todo_id}` for user '{user.get('username')}'"
         )
 
     db.query(Todos).filter(Todos.id == todo_id).delete()
