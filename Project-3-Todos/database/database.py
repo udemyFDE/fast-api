@@ -15,8 +15,12 @@ BASE_DIR = Path(__file__).resolve().parent
 # Create the database inside the Database folder
 # database is going to be inside the project-3/database/
 
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todosapp.db'}" # for both users and todos tables
+# SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todosapp.db'}" # for both users and todos tables
 # SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todos.db'}" # used only for todos table
+
+
+# using Production DBMS
+SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:admin@12345@localhost/TodoApplicationDatabase'
 
 # related info below # create_engine #
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread': False})

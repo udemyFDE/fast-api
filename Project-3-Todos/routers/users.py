@@ -60,22 +60,22 @@ bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 # Pydantic model to validate the GET/PUT requests for Users
 ###################
 # # as normal strings
-# class UserVerification(BaseModel):
-#     current_password: str
-#     new_password: str = Field(min_length=6)
+class UserVerification(BaseModel):
+    current_password: str
+    new_password: str = Field(min_length=6)
 
 
-# # as form data and secure string
-class ChangePasswordForm:
-    def __init__(
-        self,
-        current_password: Annotated[SecretStr, Form()],
-        new_password: Annotated[SecretStr, Form(min_length=6)],
-        confirm_password: Annotated[SecretStr, Form(min_length=6)]
-    ):
-        self.current_password = current_password
-        self.new_password = new_password
-        self.confirm_password = confirm_password
+# # as form data and secure string, just for understanding
+# class ChangePasswordForm:
+#     def __init__(
+#         self,
+#         current_password: Annotated[SecretStr, Form()],
+#         new_password: Annotated[SecretStr, Form(min_length=6)],
+#         confirm_password: Annotated[SecretStr, Form(min_length=6)]
+#     ):
+#         self.current_password = current_password
+#         self.new_password = new_password
+#         self.confirm_password = confirm_password
 
 
 # GET record of current user
@@ -90,46 +90,46 @@ async def get_user(user: user_dependency, db: db_dependency):
 # Update (PUT) the password of current user
 @router.put("/change_password", status_code=status.HTTP_204_NO_CONTENT)
 
-# # passwords as secure string
-async def change_password(user: user_dependency, db: db_dependency,
-                          form_data: Annotated[ChangePasswordForm, Depends()]):
+# passwords as normal string
+async def change_user_password(user: user_dependency, db: db_dependency,
+                               user_verification: UserVerification):
     if user is None:
         raise HTTPException(status_code=401, detail="Not Authorized")
 
-    if form_data.new_password.get_secret_value() != form_data.confirm_password.get_secret_value():
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="New password and confirm password do not match."
-        )
-
     user_model = db.query(Users).filter(Users.id == user.get('id')).first()
 
-    if not bcrypt_context.verify(form_data.current_password.get_secret_value(), user_model.hashed_password):
+    if not bcrypt_context.verify(user_verification.current_password, user_model.hashed_password):
         raise HTTPException(
             status_code=401,
             detail="Password change failed. Please enter your current password correctly to proceed"
         )
 
-    user_model.hashed_password = bcrypt_context.hash(form_data.new_password.get_secret_value())
+    user_model.hashed_password = bcrypt_context.hash(user_verification.new_password)
 
     db.add(user_model)
     db.commit()
 
-# # passwords as normal string
-# async def change_user_password(user: user_dependency, db: db_dependency,
-#                                user_verification: UserVerification):
+# # passwords as secure string
+# async def change_password(user: user_dependency, db: db_dependency,
+#                           form_data: Annotated[ChangePasswordForm, Depends()]):
 #     if user is None:
 #         raise HTTPException(status_code=401, detail="Not Authorized")
 #
+#     if form_data.new_password.get_secret_value() != form_data.confirm_password.get_secret_value():
+#         raise HTTPException(
+#             status_code=status.HTTP_400_BAD_REQUEST,
+#             detail="New password and confirm password do not match."
+#         )
+#
 #     user_model = db.query(Users).filter(Users.id == user.get('id')).first()
 #
-#     if not bcrypt_context.verify(user_verification.current_password, user_model.hashed_password):
+#     if not bcrypt_context.verify(form_data.current_password.get_secret_value(), user_model.hashed_password):
 #         raise HTTPException(
 #             status_code=401,
 #             detail="Password change failed. Please enter your current password correctly to proceed"
 #         )
 #
-#     user_model.hashed_password = bcrypt_context.hash(user_verification.new_password)
+#     user_model.hashed_password = bcrypt_context.hash(form_data.new_password.get_secret_value())
 #
 #     db.add(user_model)
 #     db.commit()
