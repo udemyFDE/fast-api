@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent
 # Create the database inside the Database folder
 # database is going to be inside the project-3/database/
 
-# SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todosapp.db'}" # for both users and todos tables
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todosapp.db'}" # for both users and todos tables
 # SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todos.db'}" # used only for todos table
 
 
@@ -24,20 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent
 ## admin@12345 --> admin%4012345
 # SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:admin%4012345@localhost/TodoApplicationDatabase'
 
-# Or to be safe, the alternative way is
-SQLALCHEMY_DATABASE_URL = URL.create(
-    drivername="postgresql", # mysql+pymysql for MySQL
-    username="postgres",     # root for MySQL
-    password="admin@12345",  # Use your actual password
-    host="localhost",        # 127.0.0.1:3306 for MySQL
-    database="TodoApplicationDatabase",
-)
+# # Or to be safe, the alternative way is
+# SQLALCHEMY_DATABASE_URL = URL.create(
+#     drivername="postgresql", # mysql+pymysql for MySQL
+#     username="postgres",     # root for MySQL
+#     password="admin@12345",  # Use your actual password
+#     host="localhost",        # 127.0.0.1:3306 for MySQL
+#     database="TodoApplicationDatabase",
+# )
 
 # related info below # create_engine #
-# engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread': False})
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread': False})
 
 # for using Production DBMS, connect_args is only for SQLite
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+# engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 # related info below # create a session local #
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
