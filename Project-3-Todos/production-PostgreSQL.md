@@ -49,7 +49,51 @@
 ```
 pip install psycopg2-binary
 ```
+>OR
+
+```
+pip install "psycopg[binary]"
+```
+> We may face an error when we run the application when SQLAlchemy tries to use psycopg (Psycopg 3), but if we installed psycopg2-binary (Psycopg 2). These are different PostgreSQL drivers.
 
 * Now update the database URL `SQLALCHEMY_DATABASE_URL` that was used for SQLite DB for earlier exercise in `database.py`. Can comment it and add another one for `PostgreSQL`
 
+if no error using `psycopg2-binary`
 > 'postgresql://{super user}:{password}@localhost/{database name}'
+
+if any error using `psycopg2-binary`
+> 'postgresql+psycopg2://{super user}:{password}@localhost/{database name}'
+
+
+if no error using `"psycopg[binary]"`
+> 'postgresql://{super user}:{password}@localhost/{database name}'
+
+if any error using `"psycopg[binary]"`
+> 'postgresql+psycopg://{super user}:{password}@localhost/{database name}'
+
+In case of passwords having special characters, need to encode the special character or use alternate way
+
+For encoded, admin@12345 --> admin%4012345
+```
+SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:admin%4012345@localhost/TodoApplicationDatabase'
+```
+
+Safer way
+```
+SQLALCHEMY_DATABASE_URL = URL.create(
+    drivername="postgresql",
+    username="postgres",
+    password="admin@12345",  # Use your actual password
+    host="localhost",
+    database="TodoApplicationDatabase",
+)
+```
+
+* Also, update the below in the same file as `connect_args` is only for `SQLite`
+> engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread': False})
+
+to 
+
+> engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+* Now, we can run the appliation and test it.
