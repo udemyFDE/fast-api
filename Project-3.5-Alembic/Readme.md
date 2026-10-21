@@ -22,6 +22,8 @@
 
 * So as of now, we already have some data (table) within our database. Let's take a look at our current users table. For this example, we take our users table which has an ID, username, email, first_name, last_name, hashed passwords, role, is_active. Now we want to add a new column on our data that already exists. Let's say adding a phone number, in our users table, instead of having to delete the data, we are just going to add a new column of phone number.
 
+> **Note:** SQLAlchemy will create the tables, if not exist, defined in `models.py` while the Alembic is to deal with adding/removing the columns from existing tables without having to delete the data (table).
+
 ![alt text](./images/how-does-alembic-work-2.png)
 
 ### Using Alembic
