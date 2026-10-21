@@ -26,10 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent
 
 # Or to be safe, the alternative way is
 SQLALCHEMY_DATABASE_URL = URL.create(
-    drivername="postgresql",
-    username="postgres",
+    drivername="postgresql", # mysql+pymysql for MySQL
+    username="postgres",     # root for MySQL
     password="admin@12345",  # Use your actual password
-    host="localhost",
+    host="localhost",        # 127.0.0.1:3306 for MySQL
     database="TodoApplicationDatabase",
 )
 
