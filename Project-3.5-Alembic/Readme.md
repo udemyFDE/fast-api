@@ -1,5 +1,14 @@
 ## Alembic Data Migration
 
+* [_What is Alembic_](#what-is-alembic)
+* [_How to use Alembic_](#using-alembic)
+* [_Setting up Alembic_](#setting-up-alembic)
+* [_Alembic Revision_](#alembic-revision)
+    - [_alembic upgrade_](#alembic-upgrade)
+    - [_alembic downgrade_](#alembic-downgrade)
+
+### What is Alembic?
+
 ![alt text](./images/what-is-alembic.png)
 
 * We have seen in earlier section SQL Alchemy created tables (data, .db file) for our application when there was no data (table) already exist. 
@@ -16,9 +25,11 @@
 
 ![alt text](./images/how-does-alembic-work-2.png)
 
-## Using Alembic
+### Using Alembic
 
 ![alt text](./images/how-does-alembic-work-3.png)
+
+> revision # --> here # stand for Id (revsion Id)
 
 ![alt text](./images/how-does-alembic-work-4.png)
 
@@ -27,7 +38,7 @@
 ![alt text](./images/alembic-directory.png)
 
 
-## Setting up Alembic
+### Setting up Alembic
 
 
 * Install Alembic into our project.
@@ -40,4 +51,38 @@ alembic init <environment name>
 ```
 
 environment name --> similar to a virtual enviornment we created for FastAPI
->alembic init alembic
+> alembic init alembic
+
+* In `alembic.ini` we need to update the `sqlalchemy.url` to point to our database that we try to add the configuration and migrations for.
+
+> defaut --> sqlalchemy.url = driver://user:pass@localhost/dbname
+
+> update to use our .db file --> sqlalchemy.url = sqlite:///./database/todosapp.db
+
+> **Note:** the value has no qoutes unlike in the database.py
+
+
+### Alembic Revision
+
+![alt text](./images/alembic-revision.png)
+
+#### Alembic Upgrade
+
+![alt text](./images/alembic-upgrade-1.png)
+
+> None --> to expect a response of nothing (no response from the function).
+
+> user --> table name; phone_number --> coloumn to add with nullable set to True becuase immediatlely there's not going to be any data or the users already in the table have no phone numbers entered.
+
+> sa --> SQLAlchemy
+
+![alt text](./images/alembic-upgrade-2.png)
+
+
+#### Alembic Downgrade
+
+![alt text](./images/alembic-downgrade-1.png)
+
+![alt text](./images/alembic-downgrade-2.png)
+
+> -1 --> to revert to last migration

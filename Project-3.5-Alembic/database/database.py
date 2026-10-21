@@ -4,10 +4,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from pathlib import Path
 
-# Get the directory containing database.py
-# for this we need to import Path from pathlib
-BASE_DIR = Path(__file__).resolve().parent
-
 # this URL is going to be used to be able to create a location of this database on our fast API application.
 # that our database is going to be inside our project-3 folder.
 # SQLALCHEMY_DATABASE_URL = 'sqlite:///./todos.db'
@@ -15,7 +11,14 @@ BASE_DIR = Path(__file__).resolve().parent
 # Create the database inside the Database folder
 # database is going to be inside the project-3/database/
 
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todosapp.db'}" # for both users and todos tables
+SQLALCHEMY_DATABASE_URL = 'sqlite:///./database/todosapp.db' # for both users and todos tables
+
+# # if any issues in resolving the path
+# # Get the directory containing database.py
+# # for this we need to import Path from pathlib
+# BASE_DIR = Path(__file__).resolve().parent
+# SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todosapp.db'}" # for both users and todos tables
+
 # SQLALCHEMY_DATABASE_URL = f"sqlite:///{BASE_DIR / 'todos.db'}" # used only for todos table
 
 
