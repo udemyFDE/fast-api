@@ -1,14 +1,16 @@
 ## Introduction
 
-* [_setup PostgreSQL_](#setup-and-installation)
-* [_create a table_](#create-a-database-table)
-* [_connect to FastAPI_](#connect-to-fastapi)
+![alt text](./productoin-DBMS-images/postgresql-intro.png)
+
+* [_setup PostgreSQL on windows_](#setup-and-installation)
+* [_setup SQL tables_](#create-a-database-tables)
+* [_connect to FastAPI application_](#connect-to-fastapi-application)
 
 
 ### Setup and Installation
 
 
-### Create a database table
+### Create database tables
 
 
-### Connect to FastAPI
+### Connect to FastAPI application

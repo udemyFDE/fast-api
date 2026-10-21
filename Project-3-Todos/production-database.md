@@ -21,4 +21,9 @@
 
 
 **Production IBM's keynotes?**
-* 
+
+![alt text](./productoin-DBMS-images/DBMS-keyNotes.png)
+
+**Overview of this section**
+
+![alt text](./productoin-DBMS-images/overview-of-section.png)
