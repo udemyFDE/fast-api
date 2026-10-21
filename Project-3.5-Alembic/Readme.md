@@ -14,7 +14,7 @@
 
 * To change/update the table we need to delete the .db file and need to run the app again after updating/adding the columns in models.py. 
 
-* If we update/add the column in models.py and run the application without deleting the existing .db file already created with earlier columns, we see the internal server error as the exsiting .db file will not have the updated columns. 
+* If we update/add the column in models.py and run the application without deleting the existing .db file already created with earlier columns, we see the internal server error as the exsiting .db file will not have the updated columns. This error comes, not for the request, but even if the user tries to login in swagger.
 
 * But Alembic will allow us to be able to add a column to our database table within our application without having to delete our table or anything like that to allow SQL alchemy to work.
 

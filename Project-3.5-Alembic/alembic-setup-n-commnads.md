@@ -58,3 +58,11 @@ eg:
 >alembic upgrade e0d0df7075d0
 
 * Once the upgrade is done, can verify it in the database table. But it will not be visible in the swagger unless the same column is added to `models.py`. Adding in models.py without upgrade will throw the error.
+
+* To `revert` the change, we can `downgrade` by running the below command to the last revision
+```
+alembic downgrade -1
+```
+> -1 (one) stands for the last revision
+
+* After running the `downgrade`, we need to also remove the column for `models.py` to avoid internal server error
