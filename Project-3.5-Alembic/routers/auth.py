@@ -52,6 +52,7 @@ class CreateUserRequest(BaseModel):
     last_name: str
     password: str  # in Users model it is defined as hashed_password
     role: str
+    phone_number: str
     # Id is not added here, as SQLAlchemy will take care of incrementing the IDs for every user being added
     # and is_active has the default set to True in the table definition in model.py
 
@@ -153,6 +154,7 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
         last_name=create_user_request.last_name,
         hashed_password=bcrypt_context.hash(create_user_request.password),
         role=create_user_request.role,
+        phone_number=create_user_request.phone_number,
         is_active=True
     )
 

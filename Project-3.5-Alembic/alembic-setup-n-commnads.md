@@ -66,3 +66,6 @@ alembic downgrade -1
 > -1 (one) stands for the last revision
 
 * After running the `downgrade`, we need to also remove the column for `models.py` to avoid internal server error
+
+
+> Assignment: (i) Add a `phone_number` field as required when we create a new user within the `auth.py` file. (ii) Create a new `PUT` request in the `users.py` file that allows a user to update their phone_number

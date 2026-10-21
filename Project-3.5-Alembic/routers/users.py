@@ -64,6 +64,9 @@ class UserVerification(BaseModel):
     current_password: str
     new_password: str = Field(min_length=6)
 
+class UpdatePhoneNumber(BaseModel):
+    phone_number: str
+
 
 # # as form data and secure string, just for understanding
 # class ChangePasswordForm:
@@ -133,3 +136,18 @@ async def change_user_password(user: user_dependency, db: db_dependency,
 #
 #     db.add(user_model)
 #     db.commit()
+
+# Update (PUT) the phone number of current user
+@router.put("/phone_number", status_code=status.HTTP_204_NO_CONTENT)
+
+async def update_phone_number(user: user_dependency, db: db_dependency,
+                              user_request: UpdatePhoneNumber):
+    if user is None:
+        raise HTTPException(status_code=401, detail="Not Authorized")
+
+    user_model = db.query(Users).filter(Users.id == user.get('id')).first()
+
+    user_model.phone_number = user_request.phone_number
+
+    db.add(user_model)
+    db.commit()
