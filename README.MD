@@ -30,10 +30,10 @@
 * Fast API can also leverage additional tools to create full stack applications where Fast API is not only responsible for the business logic but also renders the front web page.
 
 
-* `**who has used fast API?**`
+**who has used fast API?**
 - There are many companies that have used it or is currently using fast API. Some of these companies include Netflix, Uber and also Microsoft.
 
-* `**Can't I just rewrite everything myself?**`
+**Can't I just rewrite everything myself?**
 
     - `FAQ:` why do I even need a web framework?
         - you may be able to write everything yourself. But why reinvent the wheel?
