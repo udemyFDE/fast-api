@@ -35,9 +35,9 @@
 
 **Can't I just rewrite everything myself?**
 
-    - `FAQ:` why do I even need a web framework?
-        - you may be able to write everything yourself. But why reinvent the wheel?
-        - Web frameworks allow a simplified way for rapid development.
-        - This includes many years of development, which allows you to have a secure and fast application.
+- `FAQ:` why do I even need a web framework?
+    - you may be able to write everything yourself. But why reinvent the wheel?
+    - Web frameworks allow a simplified way for rapid development.
+    - This includes many years of development, which allows you to have a secure and fast application.
 
 
