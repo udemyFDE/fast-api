@@ -7,4 +7,4 @@
 4. PyCharm
 
 ## For this python course, we use PyCharm
-* Download PyCharm (community version -- free) from
+* Download PyCharm (community version -- free) from https://www.jetbrains.com/pycharm/
