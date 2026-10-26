@@ -27,3 +27,12 @@
 * We will be using `Pytest`
 
 ![alt text](./images/about-pytest.png)
+
+![alt text](./images/testing-first-step.png)
+
+![alt text](./images/test-example.png)
+
+![alt text](./images/example-unit-test.png)
+
+![alt text](./images/example-test-results.png)
+
