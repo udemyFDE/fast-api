@@ -30,6 +30,8 @@
 
 ![alt text](./images/testing-first-step.png)
 
+> To ensure `PyTest`, which is going to be the framework that we use for unit testing, is able to know that this is a test file, the easiest way to do that is just start the file with `test_<xxxx>` and the functions also start with `test`
+
 ![alt text](./images/test-example.png)
 
 ![alt text](./images/example-unit-test.png)
