@@ -1,7 +1,7 @@
 
 from sqlalchemy import create_engine, URL
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base
+# from sqlalchemy.ext.declarative import declarative_base
 from pathlib import Path
 
 # this URL is going to be used to be able to create a location of this database on our fast API application.
