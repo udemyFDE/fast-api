@@ -57,18 +57,19 @@ async def read_all(user: user_dependency, db: db_dependency):
     if user is None:
         raise HTTPException(status_code=401, detail="Authentication failed")
 
-    # return db.query(Todos).all()
-    # Todos need to be imported from models.py, which has the Todos Class defined
-    # the app will run the select * from todos query
-    # get_todos = db.query(Todos).all()
-    get_todos = db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
-    # if get_todos is not None:
-    if get_todos:
-        return get_todos
-    raise HTTPException(
-        status_code=404,
-        detail=f"No data found for the user '{user.get('username')}'"
-    )
+    # # return db.query(Todos).all()
+    # # Todos need to be imported from models.py, which has the Todos Class defined
+    # # the app will run the select * from todos query
+    # # get_todos = db.query(Todos).all()
+    return db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
+    # # if get_todos is not None:
+    # get_todos = db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
+    # if get_todos:
+    #     return get_todos
+    # raise HTTPException(
+    #     status_code=404,
+    #     detail=f"No data found for the user '{user.get('username')}'"
+    # )
 
 # Get a record (GET) using the ID as path parameter
 

@@ -19,4 +19,19 @@
 
 ![alt text](./images/testing-dependencies-2.png)
 
-* 
+* Add TestingSessionLocal and Base
+
+![alt text](./images/testing-dependencies-3.png)
+
+* Setup get_testing_db_dependency
+
+![alt text](./images/testing-dependencies-4.png)
+
+* Mock the current logged in user for testing
+
+![alt text](./images/testing-dependencies-5.png)
+
+
+* Normal setup, we have the `app = FastAPI()`. However, to make sure fast API knows this is a testing environment, we need to wrap it in a testing client.
+
+![alt text](./images/testing-the-app.png)
