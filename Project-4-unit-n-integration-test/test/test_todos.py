@@ -78,9 +78,10 @@ def test_read_all_authenticated():
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == []
 
-# this will pass only if, in todos.py, read_all function only has the return statement below
+# Only with this function, this file will create a testdb.db which would be empty
+# the test will pass if, in todos.py, read_all function only has the return statement below
 # return db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
-# instead of the logic for exception
+# instead of the below logic for exception
 #  # get_todos = db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
 #     # if get_todos:
 #     #     return get_todos
