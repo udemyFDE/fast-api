@@ -32,6 +32,7 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 
 
 # Calling the engine from database.py file to add Base
+# to use table definitions of prod db
 Base.metadata.create_all(bind=engine)
 
 
