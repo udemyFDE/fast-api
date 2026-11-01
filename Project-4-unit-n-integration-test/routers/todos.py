@@ -86,7 +86,8 @@ async def read_todo(user: user_dependency, db: db_dependency, todo_id: int = Pat
         return todo_model
     raise HTTPException(
         status_code=404,
-        detail=f"No record found with Id: '{todo_id}' for the user '{user.get('username')}'"
+        # detail=f"No record found with Id: '{todo_id}' for the user '{user.get('username')}'"
+        detail="Todo not found"
     )
 
 # Create a record (POST)
@@ -119,7 +120,8 @@ async def update_todo(user: user_dependency, db: db_dependency,
     if todo_model is None:
         raise HTTPException(
             status_code=404,
-            detail=f"No record found with the Id `{todo_id}` for user '{user.get('username')}'"
+            # detail=f"No record found with the Id `{todo_id}` for user '{user.get('username')}'"
+            detail="Todo not found"
         )
 
     todo_model.title = todo_request.title
