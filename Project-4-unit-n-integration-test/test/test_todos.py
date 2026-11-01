@@ -4,57 +4,72 @@ this is to test todos.py in routers folder
 
 '''
 from http.client import responses
-
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
-from database.database import Base
-from main import app
 from routers.todos import get_db, get_current_user
-
-# to force our application to be run as test
-from fastapi.testclient import TestClient
 from fastapi import status
-import pytest
 from database.models import Todos
+from .utils import *
 
-# create a test DB in database folder
-SQLALCHEMY_DATABASE_URL = 'sqlite:///./database/testdb.db'
-
-
-# create an engine
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL,
-    connect_args={'check_same_thread': False},
-    poolclass=StaticPool
-)
-
-# create a testing session local for a testing environment to isolate from prod app
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
-# Calling the engine from database.py file to add Base
-# to use table definitions of prod db
-Base.metadata.create_all(bind=engine)
+###############################
+# added in utils.py from here #
+###############################
+# from sqlalchemy import create_engine, text
+# from sqlalchemy.orm import sessionmaker
+# from sqlalchemy.pool import StaticPool
+# from database.database import Base
+# from main import app
+# from fastapi.testclient import TestClient   # to force our application to be run as test
+# import pytest
+#############################
+# added in utils.py to here #
+#############################
+# after adding these dependencies and the reusable code below in utils.py
+# just import here everything from utils
 
 
-# In todos.py we have get_db function to fetch the db details and is added as a dependency for each endpoint
-# Now, we need to override the get_db functionality only if we call it from test
-# to call the testdb.db instead of production db todosapp.db
 
-def override_get_db():
-    db = TestingSessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+###############################
+# added in utils.py from here #
+###############################
+# # create a test DB in database folder
+# SQLALCHEMY_DATABASE_URL = 'sqlite:///./database/testdb.db'
+#
+#
+# # create an engine
+# engine = create_engine(
+#     SQLALCHEMY_DATABASE_URL,
+#     connect_args={'check_same_thread': False},
+#     poolclass=StaticPool
+# )
+#
+# # create a testing session local for a testing environment to isolate from prod app
+# TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+#
+#
+# # Calling the engine from database.py file to add Base
+# # to use table definitions of prod db
+# Base.metadata.create_all(bind=engine)
+#
+#
+# # In todos.py we have get_db function to fetch the db details and is added as a dependency for each endpoint
+# # Now, we need to override the get_db functionality only if we call it from test
+# # to call the testdb.db instead of production db todosapp.db
+#
+# def override_get_db():
+#     db = TestingSessionLocal()
+#     try:
+#         yield db
+#     finally:
+#         db.close()
+#
+#
+# # function to mock the current user
+# def override_get_current_user():
+#     return {'username': 'adminhyd', 'id': 1, 'role': 'admin'}
+#     # these user details can be anything, no need to exist in prod DB
 
-
-# function to mock the current user
-def override_get_current_user():
-    return {'username': 'adminhyd', 'id': 1, 'role': 'admin'}
-    # these user details can be anything, no need to exist in prod DB
-
+#############################
+# added in utils.py to here #
+#############################
 
 
 # # now we need to add app dependency overrides
@@ -70,38 +85,46 @@ app.dependency_overrides[get_db] = override_get_db
 # # need to override this user dependency as well
 app.dependency_overrides[get_current_user] = override_get_current_user
 
-# app from main.py
-client = TestClient(app)
 
+###############################
+# added in utils.py from here #
+###############################
+# # app from main.py
+# client = TestClient(app)
+#
+#
+# # fixture
+# @pytest.fixture()
+#
+# def test_todo():
+#     # test todo will the todos from model #
+#     todo = Todos(
+#         title="Learn to code",
+#         description="Need to learn everyday..!",
+#         priority=5,
+#         complete=False,
+#         owner_id=1
+#     )
+#
+#     # add the data to test DB and delete after test
+#     db = TestingSessionLocal()  # the session local must be of test DB and not of the prod DB
+#     db.add(todo)
+#     db.commit()
+#     yield todo
+#     # after yielding the data, it is deleted after every test.... so nothing exist in test DB after test
+#     # without the below command the data will not be deleted in test DB
+#     with engine.connect() as connection:
+#         connection.execute(text("DELETE FROM todos;"))
+#         connection.commit()
+#
+#     # When the fixture is called, it will add the record defined in test_todo
+#     # when the fixture reaches yield the control will be handed over to the functions calling it
+#     # once the function is tested, the control is handed to Fixture continuing after yield
+#     # Fixture cleanup will start, the delete command will be executed to clean up the test DB
 
-# fixture
-@pytest.fixture()
-
-def test_todo():
-    # test todo will the todos from model #
-    todo = Todos(
-        title="Learn to code",
-        description="Need to learn everyday..!",
-        priority=5,
-        complete=False,
-        owner_id=1
-    )
-
-    # add the data to test DB and delete after test
-    db = TestingSessionLocal()  # the session local must be of test DB and not of the prod DB
-    db.add(todo)
-    db.commit()
-    yield todo
-    # after yielding the data, it is deleted after every test.... so nothing exist in test DB after test
-    # without the below command the data will not be deleted in test DB
-    with engine.connect() as connection:
-        connection.execute(text("DELETE FROM todos;"))
-        connection.commit()
-
-    # When the fixture is called, it will add the record defined in test_todo
-    # when the fixture reaches yield the control will be handed over to the functions calling it
-    # once the function is tested, the control is handed to Fixture continuing after yield
-    # Fixture cleanup will start, the delete command will be executed to clean up the test DB
+#############################
+# added in utils.py to here #
+#############################
 
 
 # now we can call the fixture by passing the function trest_todo, under it, as an argument
@@ -173,7 +196,7 @@ def test_create_todo(test_todo):
 
 
 # this is to test the update request update_todo put("/todo/{todo_id}") in todos.py
-# Here we need to update the data already saved in test DB either by GET or POST tests
+# Here we need to update the data already saved in test DB that will be inserted by the fixture test_todo
 def test_update_todo(test_todo):
     request_data = {
         'title': 'Updated todo title..!',
@@ -210,9 +233,29 @@ def test_update_todo_not_found(test_todo):
     assert response.status_code == 404
     assert response.json() == {'detail': 'Todo not found'}
     # above response code should be same as in the original endpoint
-    # these assertions should match with the HTTP exception for read_todo in todos.py
+    # these assertions should match with the HTTP exception for update_todo in todos.py
 
 
+# this is to test the delete request delete_todo delete("/todo/{todo_id}") in todos.py
+# Here we need to delete the data already saved in test DB that will be inserted by the fixture test_todo
+def test_delete_todo(test_todo):
+    response = client.delete("/todo/1")
+    assert response.status_code == 204
+    # assert response.status_code == status.HTTP_204_NO_CONTENT
+    # above response code should be same as in the original endpoint
+    # this is to check if the data sent through DELETE API endpoint was actually deleted in the test database.
+    db = TestingSessionLocal()
+    model = db.query(Todos).filter(Todos.id == 1).first()
+    assert model is None
+    # model should be none after deleting the only record inserted by fixture test_todo
+
+
+def test_delete_todo_not_found(test_todo):
+    response = client.delete("/todo/999")
+    assert response.status_code == 404
+    assert response.json() == {'detail': 'Todo not found'}
+    # above response code should be same as in the original endpoint
+    # these assertions should match with the HTTP exception for delete_todo in todos.py
 
 
 # # test function

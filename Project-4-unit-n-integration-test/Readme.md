@@ -3,6 +3,7 @@
 1. [_What is testing_](#what-is-testing)
 2. [_Types of testing_](#types-of-testing)
 3. [_How to test_](#how-to-test)
+4. [_utils file_](#utils-file)
 
 #### What is testing
 ![alt text](./images/what-is-testing.png)
@@ -38,3 +39,9 @@
 
 ![alt text](./images/example-test-results.png)
 
+
+#### Utils file
+
+* To create `reusability` within testing platform.
+
+* When we created `test_todos.py`, we have a lot of code with all the dependencies overriding, fixtures, database connections. And the same should be done for admin tests, authentication tests, user tests. To avoid doing this every single time we can use `utils.py` which will have all the reusable code in it.
