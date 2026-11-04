@@ -154,6 +154,7 @@ def test_read_one_authenticated(test_todo):
                                 'priority': 5,
                                 'owner_id': 1,
                                 'id': 1}
+    # this data should be same as provided in test_todo fixture in utils.py
 
 
 # this is to test for todo not found
